@@ -30,11 +30,12 @@ repository = 'https://github.com/d9pouces/modersite'
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-df-config = ">=1.2.41"
+df-config = ">=1.2.42"
 django = ">=5.0"
 django-bootstrap5 = ">=23.3"
 django-csp = "^3.7"
 django-minio-storage = "^0.5.7"
+django-pipeline = "^3.1.0"
 django-redis = "^5.4.0"
 django-redis-sessions = "^0.6.2"
 jsmin = "^3.0.1"
@@ -43,6 +44,7 @@ python = "^3.10"
 redis = "^5.0.1"
 
 [tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
 daphne = "^4.1.2"
 poetry = "^1.7.1"
 
