@@ -1,0 +1,76 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.poetry]
+authors = ["d9pouces <github@19pouces.net>"]
+classifiers = [
+  'Development Status :: 5 - Production/Stable',
+  'Framework :: Django :: 5.0',
+  'License :: OSI Approved :: CEA CNRS Inria Logiciel Libre License, version 2.1 (CeCILL-2.1)',
+  'Operating System :: MacOS :: MacOS X',
+  'Operating System :: POSIX :: BSD',
+  'Operating System :: POSIX :: Linux',
+  'Operating System :: Unix',
+  'Natural Language :: English',
+  'Natural Language :: French',
+  'Programming Language :: Python :: 3 :: Only',
+  'Programming Language :: Python :: 3.10',
+  'Programming Language :: Python :: 3.11',
+  'Programming Language :: Python :: 3.12'
+]
+description = "Proof of concept for a modern Django website"
+documentation = 'https://github.com/d9pouces/modersite'
+license = "CeCILL-B"
+maintainers = ["d9pouces <github@19pouces.net>"]
+name = "modersite"
+packages = [{include = "modersite"}]
+readme = "README.md"
+repository = 'https://github.com/d9pouces/modersite'
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+df-config = ">=1.2.41"
+django = ">=5.0"
+django-bootstrap5 = ">=23.3"
+django-csp = "^3.7"
+django-minio-storage = "^0.5.7"
+django-redis = "^5.4.0"
+django-redis-sessions = "^0.6.2"
+jsmin = "^3.0.1"
+psycopg = "^3.2.1"
+python = "^3.10"
+redis = "^5.0.1"
+
+[tool.poetry.group.dev.dependencies]
+daphne = "^4.1.2"
+poetry = "^1.7.1"
+
+[tool.poetry.scripts]
+modersite-ctl = 'df_config.management:manage'
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "df_config.config.base"
+minversion = "6.0"
+required_plugins = "pytest-django"
+testpaths = ["modersite_tests"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = [
+  "E",
+  "EXE",
+  "F",
+  "D",
+  "DJ",
+  "I",
+  "N",
+  "UP",
+  "S",
+  "W"
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

@@ -1,0 +1,50 @@
+services:
+  sql_database:
+    image: postgres:alpine
+    volumes:
+    - .docker/postgresql:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD, pg_isready, -U, u_modersite, -d, d_modersite]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    environment:
+    - PGDATA=/var/lib/postgresql/data/postgresql
+    - POSTGRES_DB=d_modersite
+    - POSTGRES_PASSWORD=p_modersite
+    - POSTGRES_USER=u_modersite
+    ports:
+    - 127.0.0.1:5432:5432
+    restart: always
+  redis_database:
+    image: redis:alpine
+    volumes:
+    - .docker/redis:/data
+    command: redis-server --requirepass "p_modersite"
+    environment:
+    - REDIS_PASSWORD=p_modersite
+    ports:
+    - 127.0.0.1:6379:6379
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: always
+  minio_storage:
+    image: minio/minio:latest
+    volumes:
+    - .docker/minio:/data
+    environment:
+    - MINIO_ROOT_USER=u_modersite
+    - MINIO_ROOT_PASSWORD=p_modersite
+    command: server --address 0.0.0.0:9000 --console-address 0.0.0.0:9001 --compat /data
+    ports:
+    - 127.0.0.1:9000:9000
+    - 127.0.0.1:9001:9001
+    healthcheck:
+      interval: 60s
+      retries: 10
+      test: [CMD, mc, ready, local]
+      timeout: 5s
+    restart: always
