@@ -16,9 +16,18 @@ DF_CSS = ["css/theme.css"]
 PIPELINE = {
     "PIPELINE_ENABLED": SettingReference("PIPELINE_ENABLED"),
     "JAVASCRIPT": {
-        "default": {
-            "source_filenames": ["js/main.js"],
-            "output_filename": "js/default.js",
+        "base": {
+            "source_filenames": ["js/base.js"],
+            "output_filename": "js/base.min.js",
+            "integrity": "sha384",
+            "crossorigin": "anonymous",
+            "extra_context": {
+                "defer": True,
+            },
+        },
+        "app": {
+            "source_filenames": ["js/app.js"],
+            "output_filename": "js/app.min.js",
             "integrity": "sha384",
             "crossorigin": "anonymous",
             "extra_context": {
@@ -27,16 +36,13 @@ PIPELINE = {
         },
     },
     "STYLESHEETS": {
-        "default": {
-            "source_filenames": ["css/theme.css"],
-            "output_filename": "css/default.css",
+        "base": {
+            "source_filenames": ["css/base.css"],
+            "output_filename": "css/base.min.css",
             "extra_context": {"media": "all"},
         },
     },
     "CSS_COMPRESSOR": "pipeline.compressors.yuglify.YuglifyCompressor",
     "JS_COMPRESSOR": "pipeline.compressors.uglifyjs.UglifyJSCompressor",
-    "COMPILERS": [
-        "pipeline.compilers.sass.SASSCompiler",
-        "df_config.apps.pipeline.TypescriptCompiler",
-    ],
+    "COMPILERS": [],
 }
