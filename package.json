@@ -1,0 +1,26 @@
+{
+    "name": "modersite",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production"
+    },
+    "keywords": [],
+    "author": "d9pouces",
+    "license": "CeCILL-B",
+    "dependencies": {
+        "bootstrap": "^5.3.3"
+    },
+    "devDependencies": {
+        "css-loader": "^7.1.2",
+        "sass": "^1.77.6",
+        "sass-loader": "^14.2.1",
+        "style-loader": "^4.0.0",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.2.2",
+        "webpack": "^5.92.1",
+        "webpack-cli": "^5.1.4"
+    }
+}

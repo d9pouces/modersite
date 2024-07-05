@@ -7,3 +7,7 @@ CSP_STYLE_SRC = [
     "https://fonts.googleapis.com",
 ]
 CSP_FONT_SRC = ["'self'", "https://fonts.gstatic.com"]
+DF_JS = [
+    "js/main.js",
+]
+DF_CSS = ["css/theme.css"]
