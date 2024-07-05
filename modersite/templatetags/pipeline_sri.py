@@ -11,10 +11,11 @@ from django.utils.safestring import mark_safe
 from pipeline.templatetags.pipeline import JavascriptNode, StylesheetNode
 from pipeline.utils import guess_type
 
+import settings
+
 register = template.Library()
 
 
-@lru_cache
 def get_sri(path, method=None):
     """Generate a Subresource Integrity hash for the given file."""
     if method in {"sha256", "sha384", "sha512"} and staticfiles_storage.exists(path):
@@ -25,6 +26,10 @@ def get_sri(path, method=None):
         hashed = base64.b64encode(h.digest()).decode()
         return f"{method}-{hashed}"
     return None
+
+
+if not settings.DEBUG:
+    get_sri = lru_cache(maxsize=1024)(get_sri)
 
 
 class SRIJavascriptNode(JavascriptNode):
