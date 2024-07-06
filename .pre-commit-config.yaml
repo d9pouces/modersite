@@ -1,20 +1,47 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
-- repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
-  rev: v0.5.0
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
   hooks:
-      # Run the linter.
+  - id: pretty-format-json
+    args: [--autofix]
+    exclude: ^(node_modules/.*)
+  - id: check-json
+    exclude: ^(node_modules/.*)
+  - id: check-toml
+    exclude: ^(node_modules/.*)
+  - id: check-yaml
+    exclude: ^(node_modules/.*)
+  - id: check-xml
+    exclude: ^(node_modules/.*)
+  - id: check-added-large-files
+  - id: check-ast
+  - id: check-byte-order-marker
+  - id: check-builtin-literals
+  - id: check-case-conflict
+  - id: check-executables-have-shebangs
+  - id: check-shebang-scripts-are-executable
+  - id: check-merge-conflict
+  - id: check-symlinks
+  - id: check-vcs-permalinks
+  - id: destroyed-symlinks
+  - id: fix-byte-order-marker
+  - id: mixed-line-ending
+  - id: sort-simple-yaml
+    exclude: ^(node_modules/.*)
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.5.1
+  hooks:
   - id: ruff
     args: [--fix]
-      # Run the formatter.
   - id: ruff-format
+    exclude: ^(node_modules/.*)
 - repo: https://github.com/shellcheck-py/shellcheck-py
   rev: v0.10.0.1
   hooks:
   - id: shellcheck
-    exclude: ^(id_tests/.*|npm/node_modules/.*|tools/.*|doc/.*)
+    exclude: ^(node_modules/.*)
 - repo: https://github.com/d9pouces/mybestpractices
   rev: 0.3.8
   hooks:
@@ -25,9 +52,17 @@ repos:
   hooks:
   - id: pretty-format-ini
     args: [--autofix]
+    exclude: ^(node_modules/.*)
   - id: pretty-format-toml
     args: [--autofix]
+    exclude: ^(node_modules/.*)
   - id: pretty-format-yaml
     args: [--autofix]
+    exclude: ^(node_modules/.*)
+- repo: https://github.com/pre-commit/mirrors-eslint
+  rev: v9.6.0
+  hooks:
+  - id: eslint
+    exclude: ^(node_modules/.*)
 default_language_version:
   python: python3.12

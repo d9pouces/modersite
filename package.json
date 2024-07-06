@@ -1,31 +1,31 @@
 {
-    "name": "modersite",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.ts",
-    "scripts": {
-        "dev": "webpack --mode development",
-        "build": "webpack --mode production"
-    },
-    "keywords": [],
-    "author": "d9pouces",
-    "license": "CeCILL-B",
-    "dependencies": {
-        "bootstrap": "^5.3.3",
-        "@alpinejs/csp": "^3.14.1",
-        "htmx.org": "^2.0.0"
-    },
-    "devDependencies": {
-        "css-loader": "^7.1.2",
-        "sass": "^1.77.6",
-        "sass-loader": "^14.2.1",
-        "source-map-loader": "^5.0.0",
-        "style-loader": "^4.0.0",
-        "ts-loader": "^9.5.1",
-        "typescript": "^5.2.2",
-        "webpack": "^5.92.1",
-        "webpack-cli": "^5.1.4",
-        "@types/webpack-env": "^1.18.5",
-        "@types/alpinejs": "^3.13.10"
-    }
+  "author": "d9pouces",
+  "dependencies": {
+    "@alpinejs/csp": "^3.14.1",
+    "bootstrap": "^5.3.3",
+    "htmx.org": "^2.0.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "@types/alpinejs": "^3.13.10",
+    "@types/webpack-env": "^1.18.5",
+    "css-loader": "^7.1.2",
+    "sass": "^1.77.6",
+    "sass-loader": "^14.2.1",
+    "source-map-loader": "^5.0.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.2.2",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "keywords": [],
+  "license": "CeCILL-B",
+  "main": "index.ts",
+  "name": "modersite",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development"
+  },
+  "version": "1.0.0"
 }
