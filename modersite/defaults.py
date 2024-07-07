@@ -9,6 +9,17 @@ CSP_STYLE_SRC = [
     "https://fonts.googleapis.com",
 ]
 CSP_FONT_SRC = ["'self'", "https://fonts.gstatic.com"]
+CSP_DEFAULT_SRC = ["'none'"]
+CSP_SCRIPT_SRC = ["'self'"]
+CSP_OBJECT_SRC = ["'self'"]
+CSP_MEDIA_SRC = ["'self'"]
+CSP_FRAME_SRC = ["'self'"]
+CSP_CHILD_SRC = ["'self'"]
+CSP_FRAME_ANCESTORS = ["'self'"]
+CSP_FORM_ACTION = ["'self'"]
+CSP_MANIFEST_SRC = ["'self'"]
+CSP_BASE_URI = ["'self'"]
+
 DF_JS = [
     "js/main.js",
 ]
@@ -17,7 +28,7 @@ PIPELINE = {
     "PIPELINE_ENABLED": SettingReference("PIPELINE_ENABLED"),
     "JAVASCRIPT": {
         "base": {
-            "source_filenames": ["js/base.js"],
+            "source_filenames": ["js/base.js", "js/df_websockets.min.js"],
             "output_filename": "js/base.min.js",
             "integrity": "sha384",
             "crossorigin": "anonymous",
@@ -26,7 +37,7 @@ PIPELINE = {
             },
         },
         "app": {
-            "source_filenames": ["js/app.js"],
+            "source_filenames": ["js/app.ts"],
             "output_filename": "js/app.min.js",
             "integrity": "sha384",
             "crossorigin": "anonymous",

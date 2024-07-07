@@ -1,20 +1,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./modersite_js/app.ts":
-/*!*****************************!*\
-  !*** ./modersite_js/app.ts ***!
-  \*****************************/
+/***/ 547:
 /***/ (() => {
 
 
 
 /***/ }),
 
-/***/ "./modersite_js/app.scss":
-/*!*******************************!*\
-  !*** ./modersite_js/app.scss ***!
-  \*******************************/
+/***/ 791:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -88,9 +82,9 @@ module.exports = __webpack_require__.p + "css/app.css";
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	__webpack_require__("./modersite_js/app.ts");
+/******/ 	__webpack_require__(547);
 /******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./modersite_js/app.scss");
+/******/ 	var __webpack_exports__ = __webpack_require__(791);
 /******/ 	
 /******/ })()
 ;

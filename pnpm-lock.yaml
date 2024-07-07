@@ -18,9 +18,9 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
     devDependencies:
-      '@types/alpinejs':
-        specifier: ^3.13.10
-        version: 3.13.10
+      '@eslint/js':
+        specifier: ^9.6.0
+        version: 9.6.0
       '@types/webpack-env':
         specifier: ^1.18.5
         version: 1.18.5
@@ -61,6 +61,10 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
 
+  '@eslint/js@9.6.0':
+    resolution: {integrity: sha512-D9B0/3vNg44ZeWbYMpBoXqNP4j6eQD5vNwIlGAuFRRzK/WtT/jvDQW3Bi9kkf3PMDMlM7Yi+73VLUsn5bJcl8A==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -84,9 +88,6 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
-  '@types/alpinejs@3.13.10':
-    resolution: {integrity: sha512-ah53tF6mWuuwerpDE7EHwbZErNDJQlsLISPqJhYj2RZ9nuTYbRknSkqebUd3igkhLIZKkPa7IiXjSn9qsU9O2w==}
 
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
@@ -786,6 +787,8 @@ snapshots:
 
   '@discoveryjs/json-ext@0.5.7': {}
 
+  '@eslint/js@9.6.0': {}
+
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
       '@jridgewell/set-array': 1.2.1
@@ -809,8 +812,6 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.4.15
 
   '@popperjs/core@2.11.8': {}
-
-  '@types/alpinejs@3.13.10': {}
 
   '@types/eslint-scope@3.7.7':
     dependencies:

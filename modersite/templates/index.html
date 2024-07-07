@@ -1,13 +1,38 @@
-{% load static pipeline_sri %}<!doctype html>
+{% load static pipeline_sri websockets %}<!doctype html>
 <html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo 2</title>
+    <meta name="author" content="Thomas Park">
+    <title>Bootstrap demo</title>
+    <meta property="og:title" content="Bootstrap demo"/>
+    <meta property="twitter:creator" content="#Django"/>
+    <meta property="twitter:site" content="#Django"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://www.imdb.com/title/tt0117500/"/>
+    <meta property="og:image" content="{% static 'favicon/favicon.ico' %}"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:site_name" content="Bootstrap demo">
+    <meta property="og:description" content="Bootstrap demo">
+    <meta property="organization.name" content=""/>
+    <meta property="organization.logo" content=""/>
+    <meta name="description" content="Bootstrap demo">
+    <link rel="canonical" href="https://www.imdb.com/title/tt0117500/"/>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Modersite">
+    <meta name="application-name" content="Modersite">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     {% sri_stylesheet "base" %}
     {% sri_stylesheet "app" %}
-    {% sri_javascript "base" %}
     {% sri_javascript "app" %}
+    {% sri_javascript "base" %}
 </head>
 <body>
 
@@ -178,12 +203,10 @@
         </div>
     </div>
 
-    <div x-data="{ open: true }" x-show="open">
-        <button @click="open = false">x</button>
-        <span>
-    Press the little "x" to close this message...
-  </span>
-    </div>
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %} aria-label="Close"></button>
+</div>
 
     <!-- Navbar
     ================================================== -->
@@ -500,22 +523,22 @@
 
                 <div class="bs-component mb-3">
                     <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                        <input type="checkbox" class="btn-check" id="btncheck1" checked autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck1" checked>
                         <label class="btn btn-primary" for="btncheck1">Checkbox 1</label>
-                        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck2">
                         <label class="btn btn-primary" for="btncheck2">Checkbox 2</label>
-                        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck3">
                         <label class="btn btn-primary" for="btncheck3">Checkbox 3</label>
                     </div>
                 </div>
 
                 <div class="bs-component mb-3">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
                         <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" checked>
                         <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" checked>
                         <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
                     </div>
                 </div>
