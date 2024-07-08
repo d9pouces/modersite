@@ -3,6 +3,15 @@
 from df_config.config.dynamic_settings import SettingReference
 
 DF_INDEX_VIEW = "modersite.views.IndexView"
+DF_SITE_TITLE = "Technological proof of concept"
+DF_SITE_DESCRIPTION = "This is a technological proof of concept."
+DF_SITE_KEYWORDS = ["Django", "Bootstrap", "WebSockets", "HTMX", "Django Channels"]
+DF_SITE_AUTHOR = "d9pouces"
+DF_SITE_ORGANIZATION = "d9pouces"
+DF_SITE_X_ACCOUNT = "d9pouces"
+DF_ANDROID_THEME_COLOR = "#ffffff"
+DF_ANDROID_BACKGROUND_COLOR = "#ffffff"
+DF_MICROSOFT_BACKGROUND_COLOR = "#da532c"
 CSP_IMG_SRC = ["'self'", "data: w3.org/svg/2000"]
 CSP_STYLE_SRC = [
     "'self'",
@@ -19,6 +28,9 @@ CSP_FRAME_ANCESTORS = ["'self'"]
 CSP_FORM_ACTION = ["'self'"]
 CSP_MANIFEST_SRC = ["'self'"]
 CSP_BASE_URI = ["'self'"]
+DF_TEMPLATE_CONTEXT_PROCESSORS = [
+    "modersite.context_processors.global_site_infos",
+]
 
 DF_JS = [
     "js/main.js",

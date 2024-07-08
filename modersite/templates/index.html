@@ -1,33 +1,40 @@
-{% load static pipeline_sri websockets %}<!doctype html>
-<html lang="en" data-bs-theme="light">
+{% load static pipeline_sri websockets modersite %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="{{ COLOR_THEME|default:'light' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Thomas Park">
-    <title>Bootstrap demo</title>
-    <meta property="og:title" content="Bootstrap demo"/>
-    <meta property="twitter:creator" content="#Django"/>
-    <meta property="twitter:site" content="#Django"/>
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}"/>
+    <title>{{ PAGE_TITLE|default:DF_SITE_TITLE }}</title>
+    <meta property="og:title" content="{{ PAGE_TITLE|default:DF_SITE_TITLE }}"/>
+    <meta property="og:site_name" content="{{ DF_SITE_TITLE }}">
+    <meta name="apple-mobile-web-app-title" content="{{ DF_SITE_TITLE }}">
+    <meta name="application-name" content="{{ DF_SITE_TITLE }}">
+    <meta name="author" content="{{ DF_SITE_AUTHOR }}">
+    {% if PAGE_KEYWORDS %}
+        <meta name="keywords" content="{{ PAGE_KEYWORDS|join:', ' }}">
+    {% elif DF_SITE_KEYWORDS %}
+        <meta name="keywords" content="{{ DF_SITE_KEYWORDS|join:', ' }}">
+    {% endif %}
+    <meta property="twitter:creator" content="{{ DF_SITE_X_ACCOUNT }}"/>
+    <meta property="twitter:site" content="{{ DF_SITE_X_ACCOUNT }}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://www.imdb.com/title/tt0117500/"/>
-    <meta property="og:image" content="{% static 'favicon/favicon.ico' %}"/>
-    <meta property="og:locale" content="en_US"/>
-    <meta property="og:site_name" content="Bootstrap demo">
-    <meta property="og:description" content="Bootstrap demo">
-    <meta property="organization.name" content=""/>
-    <meta property="organization.logo" content=""/>
-    <meta name="description" content="Bootstrap demo">
-    <link rel="canonical" href="https://www.imdb.com/title/tt0117500/"/>
+    <meta property="organization.name" content="{{ DF_SITE_ORGANIZATION }}"/>
+    <meta property="organization.logo" content="{% static 'favicon/apple-touch-icon.png' %}"/>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <link rel="manifest" href="{% abs_url 'site_webmanifest' %}">
     <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
-    <meta name="apple-mobile-web-app-title" content="Modersite">
-    <meta name="application-name" content="Modersite">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="{{ DF_MICROSOFT_BACKGROUND_COLOR }}">
+    <meta name="msapplication-config" content="{% abs_url 'browserconfig' %}" />
+    <meta name="theme-color" content="{{ DF_ANDROID_THEME_COLOR }}">
+
+    <meta property="og:description" content="{{ PAGE_DESCRIPTION|default:DF_SITE_DESCRIPTION }}">
+    <meta name="description" content="{{ PAGE_DESCRIPTION|default:DF_SITE_DESCRIPTION }}">
+    <meta property="og:image" content="{% if PAGE_IMAGE_URL %}{{ PAGE_IMAGE_URL }}{% else %}{% static 'favicon/favicon.ico' %}{% endif %}"/>
+    <link rel="canonical" href="{{ PAGE_URL|default:request.path }}"/>
+    <meta property="og:url" content="{{ PAGE_URL|default:request.path }}"/>
 
     {% sri_stylesheet "base" %}
     {% sri_stylesheet "app" %}
@@ -203,10 +210,11 @@
         </div>
     </div>
 
-   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-  <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %} aria-label="Close"></button>
-</div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %}
+                aria-label="Close"></button>
+    </div>
 
     <!-- Navbar
     ================================================== -->
