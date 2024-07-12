@@ -25,14 +25,23 @@ module.exports = {
     module: {
         rules: [
             {
-        test: /\.js$/,
-        enforce: "pre",
-        use: ["source-map-loader"],
-      },
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {filename: 'webfonts/[name][ext][query]'},
+            },
+            {
+                test: /\.c?js$/,
+                enforce: "pre",
+                use: ["source-map-loader"],
+            },
             {
                 test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/,
+                type: 'asset/resource',
             },
             {
                 test: /\.scss$/,

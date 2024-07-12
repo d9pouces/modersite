@@ -31,6 +31,7 @@ CSP_BASE_URI = ["'self'"]
 DF_TEMPLATE_CONTEXT_PROCESSORS = [
     "modersite.context_processors.global_site_infos",
 ]
+DF_INSTALLED_APPS = ["{DF_MODULE_NAME}", "django_bootstrap5"]
 
 DF_JS = [
     "js/main.js",
@@ -42,7 +43,7 @@ PIPELINE = {
         "base": {
             "source_filenames": ["js/base.js", "js/df_websockets.min.js"],
             "output_filename": "js/base.min.js",
-            "integrity": "sha384",
+            #            "integrity": "sha384",
             "crossorigin": "anonymous",
             "extra_context": {
                 "defer": True,
@@ -51,7 +52,7 @@ PIPELINE = {
         "app": {
             "source_filenames": ["js/app.ts"],
             "output_filename": "js/app.min.js",
-            "integrity": "sha384",
+            #            "integrity": "sha384",
             "crossorigin": "anonymous",
             "extra_context": {
                 "defer": True,

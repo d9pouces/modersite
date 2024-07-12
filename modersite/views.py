@@ -2,6 +2,7 @@
 
 from df_websockets.tasks import set_websocket_topics
 from django.conf import settings
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.templatetags.static import static
 from django.views.generic import TemplateView
@@ -29,6 +30,19 @@ class BrowserConfigView(TemplateView):
 
     template_name = "favicon/browserconfig.xml"
     content_type = "application/xml"
+
+
+class DemoView(TemplateView):
+    """Demo view with many Bootstrap functionnalities."""
+
+    template_name = "demo.html"
+
+    def get_context_data(self, **kwargs):
+        """Get the context data for the view."""
+        context = super().get_context_data(**kwargs)
+        set_websocket_topics(self.request)
+        messages.error(self.request, "This is an error message.")
+        return context
 
 
 class IndexView(TemplateView):

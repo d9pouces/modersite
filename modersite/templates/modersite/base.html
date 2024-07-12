@@ -1,0 +1,178 @@
+{% load static pipeline_sri websockets modersite i18n django_bootstrap5 %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="{{ COLOR_THEME|default:'light' }}">
+<head>
+    {% block head_meta_global %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:locale" content="{{ LANGUAGE_CODE }}"/>
+        <title>{{ PAGE_TITLE|default:DF_SITE_TITLE }}</title>
+        <meta property="og:title" content="{{ PAGE_TITLE|default:DF_SITE_TITLE }}"/>
+        <meta property="og:site_name" content="{{ DF_SITE_TITLE }}">
+        <meta name="apple-mobile-web-app-title" content="{{ DF_SITE_TITLE }}">
+        <meta name="application-name" content="{{ DF_SITE_TITLE }}">
+        <meta name="author" content="{{ DF_SITE_AUTHOR }}">
+        {% if PAGE_KEYWORDS %}
+            <meta name="keywords" content="{{ PAGE_KEYWORDS|join:', ' }}">
+        {% elif DF_SITE_KEYWORDS %}
+            <meta name="keywords" content="{{ DF_SITE_KEYWORDS|join:', ' }}">
+        {% endif %}
+        <meta property="twitter:site" content="{{ DF_SITE_X_ACCOUNT }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="organization.name" content="{{ DF_SITE_ORGANIZATION }}"/>
+        <meta property="organization.logo" content="{% static 'favicon/apple-touch-icon.png' %}"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% abs_url 'site_webmanifest' %}">
+        <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="{{ DF_MICROSOFT_BACKGROUND_COLOR }}">
+        <meta name="msapplication-config" content="{% abs_url 'browserconfig' %}"/>
+        <meta name="theme-color" content="{{ DF_ANDROID_THEME_COLOR }}">
+    {% endblock head_meta_global %}
+    {% block head_meta_local %}
+        <meta property="twitter:creator" content="{{ DF_SITE_X_ACCOUNT }}"/>
+        <meta property="og:description" content="{{ PAGE_DESCRIPTION|default:DF_SITE_DESCRIPTION }}">
+        <meta name="description" content="{{ PAGE_DESCRIPTION|default:DF_SITE_DESCRIPTION }}">
+        <meta property="og:image" content="
+            {% if PAGE_IMAGE_URL %}{{ PAGE_IMAGE_URL }}{% else %}{% static 'favicon/favicon.ico' %}{% endif %}"/>
+        <link rel="canonical" href="{{ PAGE_URL|default:request.path }}"/>
+        <meta property="og:url" content="{{ PAGE_URL|default:request.path }}"/>
+    {% endblock head_meta_local %}
+    {% block media_global %}
+        {% sri_stylesheet "base" %}
+        {% sri_stylesheet "app" %}
+        {% sri_javascript "app" %}
+        {% sri_javascript "base" %}
+    {% endblock media_global %}
+    {% block media_local %}
+    {% endblock media_local %}
+</head>
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg sticky-top bg-primary" data-bs-theme="dark">
+        <div class="container">
+            {% block navbar_site_title %}<a class="navbar-brand"
+                                            href="#">{{ PAGE_TITLE|default:DF_SITE_TITLE }}</a>{% endblock navbar_site_title %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-content" aria-controls="navbar-content"
+                    aria-expanded="false"
+                    aria-label="{% trans 'Toggle navigation' %}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar-content">{% block navbar_content %}
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'demo' %}">{% trans "Demo" %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </li>
+                </ul>{% endblock %}
+                {% block navbar_search_form %}
+                    <form class="d-flex ">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="{% trans 'Search' %}"
+                                   name="search_pattern"
+                                   aria-label="{% trans 'Search' %}" aria-describedby="navbar-search-button">
+                            <button class="btn btn-outline-secondary" type="submit"
+                                    id="navbar-search-button">{% fa5_icon 'search' %}</button>
+                        </div>
+                    </form>
+                {% endblock navbar_search_form %}
+            </div>
+        </div>
+    </nav>
+{% endblock navbar %}
+
+{% block body %}
+    <div class="container px-0">
+        {% block body_messages %}
+            {% bootstrap_messages %}
+        {% endblock body_messages %}
+        {% block body_banner %}
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>{{ PAGE_TITLE|default:DF_SITE_TITLE }}</h1>
+                        <p class="lead">{{ PAGE_DESCRIPTION|default:DF_SITE_DESCRIPTION }}</p>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-6"></div>
+                </div>
+            </div>
+        {% endblock body_banner %}
+
+    {% block body_content %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %}
+                    aria-label="Close"></button>
+        </div>
+{% endblock body_content %}
+
+        {% block body_modal %}
+            <div id="source-modal" class="modal fade" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Source Code</h4>
+                            <button type="button" class="btn btn-primary btn-copy"><i class="bi bi-clipboard"></i> Copy
+                                Code
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <pre class="language-html"><code></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock body_modal %}
+        {% block body_footer %}
+            <footer id="footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled">
+                            <li class="float-end"><a href="#top">Back to top</a></li>
+                            <li><a href="https://blog.bootswatch.com/">Blog</a></li>
+                            <li><a href="https://blog.bootswatch.com/rss/">RSS</a></li>
+                            <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
+                            <li><a href="https://github.com/thomaspark/bootswatch">GitHub</a></li>
+                            <li><a href="../help/#api">API</a></li>
+                            <li><a href="../help/#donate">Donate</a></li>
+                        </ul>
+                        <p>Made by <a href="https://thomaspark.co/">Thomas Park</a>.</p>
+                        <p>Code released under the <a
+                            href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT
+                            License</a>.</p>
+                        <p>Based on <a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a>. Icons from <a
+                            href="https://icons.getbootstrap.com/" rel="nofollow">Bootstrap Icons</a>. Web fonts from <a
+                            href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
+
+                    </div>
+                </div>
+            </footer>
+        {% endblock body_footer %}
+    </div>
+{% endblock body %}
+</body>
+</html>

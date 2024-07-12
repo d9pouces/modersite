@@ -1,5 +1,7 @@
 """Custom template tags for the modersite app."""
 
+from typing import Union
+
 from django import template
 from django.conf import settings
 from django.template.base import kwarg_re
@@ -54,3 +56,36 @@ def abs_url_tag(parser, token):
         else:
             args.append(parser.compile_filter(value))
     return AbsoluteURLNode(viewname, args, kwargs, asvar)
+
+
+@register.simple_tag
+def fa5_icon(
+    name,
+    prefix="fa",
+    large: Union[int, bool] = False,
+    fixed: bool = False,
+    spin: bool = False,
+    li: bool = False,
+    rotate: Union[int, bool] = None,
+    border: bool = False,
+    color: str = None,
+):
+    """Add font-awesome icons in your HTML code."""
+    if isinstance(large, int) and 2 <= large <= 5:
+        large = f" fa-{large:d}x"
+    elif large:
+        large = " fa-lg"
+    else:
+        large = ""
+    content = '<i class="{prefix} fa-{name}{large}{fixed}{spin}{li}{rotate}{border}{color}"></i>'.format(
+        prefix=prefix,
+        name=name,
+        large=large,
+        fixed=" fa-fw" if fixed else "",
+        spin=" fa-spin" if spin else "",
+        li=" fa-li" if li else "",
+        rotate=f" fa-rotate-{rotate}" if rotate else "",
+        border=" fa-border" if border else "",
+        color=f"text-{color}" if color else "",
+    )
+    return mark_safe(content)  # noqa
