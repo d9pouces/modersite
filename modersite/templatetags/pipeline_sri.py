@@ -45,7 +45,7 @@ class SRIJavascriptNode(JavascriptNode):
                 "type": guess_type(path, "text/javascript"),
                 "url": url,
                 "crossorigin": "anonymous",
-                "integrity": get_sri(path, method="sha384"),
+                "integrity": get_sri(path, method=package.config.get("integrity")),
             }
         )
         return render_to_string(template_name, context)
@@ -78,7 +78,7 @@ class SRIStylesheetNode(StylesheetNode):
                 "type": guess_type(path, "text/css"),
                 "url": url,
                 "crossorigin": "anonymous",
-                "integrity": get_sri(path, method="sha384"),
+                "integrity": get_sri(path, method=package.config.get("integrity")),
             }
         )
         return render_to_string(template_name, context)

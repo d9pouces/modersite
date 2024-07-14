@@ -59,7 +59,7 @@ def abs_url_tag(parser, token):
 
 
 @register.simple_tag
-def fa5_icon(
+def fa6_icon(
     name,
     prefix="fa",
     large: Union[int, bool] = False,

@@ -1,5 +1,5 @@
 {% load static pipeline_sri websockets modersite i18n django_bootstrap5 %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="{{ COLOR_THEME|default:'light' }}">
+<html lang="{{ LANGUAGE_CODE }}" {% if DF_COLOR_THEMES %}data-bs-theme="{{ COLOR_THEME|default:'auto' }}" data-df-dark-theme="{{ DF_COLOR_THEMES.2.0 }}" data-df-light-theme="{{ DF_COLOR_THEMES.1.0 }}"{% endif %}>
 <head>
     {% block head_meta_global %}
         <meta charset="utf-8">
@@ -51,8 +51,9 @@
 {% block navbar %}
     <nav class="navbar navbar-expand-lg sticky-top bg-primary" data-bs-theme="dark">
         <div class="container">
-            {% block navbar_site_title %}<a class="navbar-brand"
-                                            href="#">{{ PAGE_TITLE|default:DF_SITE_TITLE }}</a>{% endblock navbar_site_title %}
+            {% block navbar_site_title %}
+                <a class="navbar-brand" href="{% url 'index' %}">{{ PAGE_TITLE|default:DF_SITE_TITLE }}</a>
+            {% endblock navbar_site_title %}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbar-content" aria-controls="navbar-content"
                     aria-expanded="false"
@@ -60,45 +61,66 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbar-content">{% block navbar_content %}
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'demo' %}">{% trans "Demo" %}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                           role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-                </ul>{% endblock %}
+            <div class="collapse navbar-collapse" id="navbar-content">
+                {% block navbar_content %}
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'index' %}">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'demo' %}">{% trans "Demo" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                               role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>
+                    </ul>{% endblock navbar_content %}
                 {% block navbar_search_form %}
                     <form class="d-flex ">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{% trans 'Search' %}"
                                    name="search_pattern"
                                    aria-label="{% trans 'Search' %}" aria-describedby="navbar-search-button">
-                            <button class="btn btn-outline-secondary" type="submit"
-                                    id="navbar-search-button">{% fa5_icon 'search' %}</button>
+                            <button class="btn btn-outline-light" type="submit"
+                                    id="navbar-search-button">{% fa6_icon 'search' %}</button>
                         </div>
                     </form>
                 {% endblock navbar_search_form %}
+                {% block navbar_dark_mode %}
+                    <a class="btn btn-outline-light df-theme-switcher" href="{% url 'theme_switch' %}?current={{ COLOR_THEME }}&next={{ request.get_full_path | urlencode }}" title="{% trans 'Switch color theme' %}">
+                    {% for color_data in DF_COLOR_THEMES %}{% if color_data.0 == COLOR_THEME %}{% fa6_icon color_data.2 %}{% endif %}{% endfor %}
+                    </a>
+                {% endblock navbar_dark_mode %}
+                {% block navbar_user %}
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-outline-light" href="{% url 'admin:logout' %}"
+                           title="{% trans 'Preferences' %}">{% fa6_icon 'tools' %}</a>
+                    {% else %}
+                        <a class="btn btn-outline-light" href="{% url 'admin:login' %}"
+                           title="{% trans 'Login' %}">{% fa6_icon 'user-circle' %}</a>
+                    {% endif %}
+                {% endblock %}
+                {% block navbar_admin %}
+                    {% if user.is_authenticated and user.is_staff %}
+                        <a class="btn btn-outline-light" href="{% url 'admin:index' %}"
+                           title="{% trans 'Administration' %}">{% fa6_icon 'tools' %}</a>
+                    {% endif %}
+                {% endblock navbar_admin %}
             </div>
         </div>
     </nav>
@@ -121,14 +143,14 @@
             </div>
         {% endblock body_banner %}
 
-    {% block body_content %}
+        {% block body_content %}
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %}
-                    aria-label="Close"></button>
-        </div>
-{% endblock body_content %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %}
+                        aria-label="Close"></button>
+            </div>
+        {% endblock body_content %}
 
         {% block body_modal %}
             <div id="source-modal" class="modal fade" tabindex="-1">

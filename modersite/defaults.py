@@ -1,6 +1,9 @@
 """Django settings for the project."""
 
+from typing import List, Tuple
+
 from df_config.config.dynamic_settings import SettingReference
+from django.utils.translation import gettext_lazy as _
 
 DF_INDEX_VIEW = "modersite.views.IndexView"
 DF_SITE_TITLE = "Technological proof of concept"
@@ -9,6 +12,11 @@ DF_SITE_KEYWORDS = ["Django", "Bootstrap", "WebSockets", "HTMX", "Django Channel
 DF_SITE_AUTHOR = "d9pouces"
 DF_SITE_ORGANIZATION = "d9pouces"
 DF_SITE_X_ACCOUNT = "d9pouces"
+DF_SITE_THEMES: List[Tuple[str, str, str]] = [  # ('theme name', 'theme label', 'icon name')
+    ("auto", _("Auto"), "toggle-on"),
+    ("light", _("Light"), "sun"),
+    ("dark", _("Dark"), "moon"),
+]
 DF_ANDROID_THEME_COLOR = "#ffffff"
 DF_ANDROID_BACKGROUND_COLOR = "#ffffff"
 DF_MICROSOFT_BACKGROUND_COLOR = "#da532c"
@@ -31,7 +39,8 @@ CSP_BASE_URI = ["'self'"]
 DF_TEMPLATE_CONTEXT_PROCESSORS = [
     "modersite.context_processors.global_site_infos",
 ]
-DF_INSTALLED_APPS = ["{DF_MODULE_NAME}", "django_bootstrap5"]
+DF_INSTALLED_APPS = ["modersite.app.ModersiteApp", "django_bootstrap5"]
+AUTH_USER_MODEL = "modersite.PreferencesUser"
 
 DF_JS = [
     "js/main.js",
@@ -64,6 +73,15 @@ PIPELINE = {
             "source_filenames": ["css/base.css"],
             "output_filename": "css/base.min.css",
             "extra_context": {"media": "all"},
+            #            "integrity": "sha384",
+            "crossorigin": "anonymous",
+        },
+        "app": {
+            "source_filenames": ["css/app.css"],
+            "output_filename": "css/app.min.css",
+            "extra_context": {"media": "all"},
+            #            "integrity": "sha384",
+            "crossorigin": "anonymous",
         },
     },
     "CSS_COMPRESSOR": "pipeline.compressors.yuglify.YuglifyCompressor",

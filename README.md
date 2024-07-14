@@ -46,6 +46,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] [DjangoCookieConsent](https://django-cookie-consent.readthedocs.io/en/latest/)
 - [ ] [Django-auto-complete-light](https://django-autocomplete-light.readthedocs.io/en/master/)
 - [ ] [Django-htmX](https://django-htmx.readthedocs.io/en/latest/)
+- [ ] [Django-components](https://django-components.readthedocs.io/en/latest/)
 - [ ] alert messages when the site is offline (maintenance mode)
 - [ ] wait for the database to be ready
 - [ ] display global messages
