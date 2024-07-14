@@ -12,7 +12,7 @@
                     {% with declined=request|cookie_group_declined:cookie_group.varname %}
 
                         {% if not accepted %}
-                            <form class="cookie-consent-accept"
+                            <form class="cookie-consent-accept formrm   "
                                   action="{% url "cookie_consent_accept" cookie_group.varname %}"
                                   method="POST">
                                 {% csrf_token %}
