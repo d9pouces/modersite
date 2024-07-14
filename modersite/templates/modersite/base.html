@@ -1,4 +1,4 @@
-{% load static pipeline_sri websockets modersite i18n django_bootstrap5 %}<!doctype html>
+{% load static pipeline_sri  modersite i18n django_bootstrap5 cookie_consent_tags %}<!doctype html>
 <html lang="{{ LANGUAGE_CODE }}" {% if DF_COLOR_THEMES %}data-bs-theme="{{ COLOR_THEME|default:'auto' }}"
       data-df-dark-theme="{{ DF_COLOR_THEMES.2.0 }}" data-df-light-theme="{{ DF_COLOR_THEMES.1.0 }}"{% endif %}>
 <head>
@@ -65,43 +65,8 @@
 
             <div class="collapse navbar-collapse" id="navbar-content">
                 {% block navbar_content %}
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'index' %}">{% trans 'Home' %}
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'demo' %}">{% trans "Demo" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                               role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
-                    </ul>{% endblock navbar_content %}
+                {% endblock navbar_content %}
                 {% block navbar_search_form %}
-                    <form class="d-flex ">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{% trans 'Search' %}"
-                                   name="search_pattern"
-                                   aria-label="{% trans 'Search' %}" aria-describedby="navbar-search-button">
-                            <button class="btn btn-outline-light" type="submit"
-                                    id="navbar-search-button">{% fa6_icon 'search' %}</button>
-                        </div>
-                    </form>
                 {% endblock navbar_search_form %}
                 {% block navbar_dark_mode %}
                     <a class="btn btn-outline-light df-theme-switcher"
@@ -113,8 +78,8 @@
                 {% endblock navbar_dark_mode %}
                 {% block navbar_user %}
                     {% if user.is_authenticated %}
-                        <a class="btn btn-outline-light" href="{% url 'admin:logout' %}"
-                           title="{% trans 'Preferences' %}">{% fa6_icon 'tools' %}</a>
+                        <a class="btn btn-outline-light" href="{% url 'admin:index' %}"
+                           title="{% trans 'Preferences' %}">{% fa6_icon 'user-circle' %}</a>
                     {% else %}
                         <a class="btn btn-outline-light" href="{% url 'admin:login' %}"
                            title="{% trans 'Login' %}">{% fa6_icon 'user-circle' %}</a>
@@ -132,6 +97,9 @@
 {% endblock navbar %}
 
 {% block body %}
+    <a class="alert-ribbon left-top fixed" href="https://url.to-your.repo" data-ribbon="Fork me on GitHub"
+       title="Fork me on GitHub">Fork me on GitHub</a>
+
     <div class="container px-0">
         {% block body_messages %}
             {% bootstrap_messages %}
@@ -149,12 +117,6 @@
         {% endblock body_banner %}
 
         {% block body_content %}
-
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                <button type="button" class="btn-close" {% js_call "html.remove" on="click" selector="[role=alert]" %}
-                        aria-label="Close"></button>
-            </div>
         {% endblock body_content %}
 
         {% block body_modal %}
@@ -176,7 +138,7 @@
         {% endblock body_modal %}
 
         {% block body_footer %}
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
                 <div class="col-md-4 d-flex align-items-center">
                     {% block body_footer_copyright %}
                         {% if DF_SITE_ORGANIZATION %}
@@ -206,7 +168,26 @@
                     {% endblock body_footer_social %}
                 </ul>
             </footer>
+
+
         {% endblock body_footer %}
+        {% block body_cookies %}
+             {% all_cookie_groups 'cookie-consent__cookie-groups' %}
+            <template id="cookie-consent__cookie-bar" data-df-cookies-status="{% url 'cookie_consent_status' %}">
+                <div class="container cookie-bar footer mt-auto py-3 bg-body-tertiary fixed-bottom">
+                    <p>
+                        {% trans "This site uses cookies for better performance and user experience. Do you agree to use these cookies?" %}</p>
+                    <div class="btn-group">
+                        <button type="button"
+                                class="btn btn-success cookie-consent__accept">{% trans 'Accept' %}</button>
+                        <button type="button"
+                                class="btn btn-danger cookie-consent__decline">{% trans 'Decline' %}</button>
+                        <a class="btn btn-secondary"
+                           href="{% url "cookie_consent_cookie_group_list" %}">{% trans 'Cookies info' %}</a>
+                    </div>
+                </div>
+            </template>
+       {% endblock body_cookies %}
     </div>
 {% endblock body %}
 </body>

@@ -3,6 +3,7 @@
 from functools import lru_cache
 from typing import Any, Optional
 
+from cookie_consent.util import get_cookie_value_from_request
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db.models import Field
@@ -59,10 +60,11 @@ def set_user_setting(
     elif request and request.user.is_authenticated:
         setattr(request.user, attr, value)
         request.user.save()
-    else:
+    elif get_cookie_value_from_request(request, "user-settings"):
         user_instance = get_user_instance()
         opts = user_instance._meta
         field: Field = opts.get_field(attr)
         widget: Widget = field.formfield().hidden_widget()
         raw_value: str = widget.format_value(value)
+
         response.set_cookie(attr, raw_value, samesite="Strict", secure=settings.USE_SSL)

@@ -50,7 +50,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] Complete solution for ListView, DetailView, CreateView, UpdateView, DeleteView
 - [ ] alert messages when the site is offline (maintenance mode)
 - [ ] wait for the database to be ready
-- [ ] display global messages
+- [ ] display global messages and banners
 - [ ] Error templates
 
 ### Excluded

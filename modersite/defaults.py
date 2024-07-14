@@ -42,14 +42,13 @@ CSP_MANIFEST_SRC = ["'self'"]
 CSP_BASE_URI = ["'self'"]
 DF_TEMPLATE_CONTEXT_PROCESSORS = [
     "modersite.context_processors.global_site_infos",
+    "django.template.context_processors.request",
 ]
-DF_INSTALLED_APPS = ["modersite.app.ModersiteApp", "django_bootstrap5"]
+DF_INSTALLED_APPS = ["modersite.app.ModersiteApp", "django_bootstrap5", "cookie_consent"]
 AUTH_USER_MODEL = "modersite.PreferencesUser"
-
-DF_JS = [
-    "js/main.js",
-]
-DF_CSS = ["css/theme.css"]
+COOKIE_CONSENT_SECURE = SettingReference("USE_SSL")
+COOKIE_CONSENT_DOMAIN = "{SERVER_NAME}"
+COOKIE_CONSENT_SAMESITE = "Strict"
 PIPELINE = {
     "PIPELINE_ENABLED": SettingReference("PIPELINE_ENABLED"),
     "JAVASCRIPT": {
