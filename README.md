@@ -16,7 +16,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [X] [Webpack](https://webpack.js.org/)
 - [X] [Node.js](https://nodejs.org/): used by webpack
 - [X] [Font-awesome](https://fontawesome.com/)
-- [ ] [Dark Mode](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+- [X] [Dark Mode](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 - [ ] [Htmx](https://htmx.org/)
 - [ ] [Select2](https://select2.org/): still use jQuery in 2024 and no real plan to remove it
 
@@ -47,6 +47,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] [Django-auto-complete-light](https://django-autocomplete-light.readthedocs.io/en/master/)
 - [ ] [Django-htmX](https://django-htmx.readthedocs.io/en/latest/)
 - [ ] [Django-components](https://django-components.readthedocs.io/en/latest/)
+- [ ] Complete solution for ListView, DetailView, CreateView, UpdateView, DeleteView
 - [ ] alert messages when the site is offline (maintenance mode)
 - [ ] wait for the database to be ready
 - [ ] display global messages

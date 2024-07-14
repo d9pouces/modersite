@@ -1,5 +1,6 @@
 {% load static pipeline_sri websockets modersite i18n django_bootstrap5 %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" {% if DF_COLOR_THEMES %}data-bs-theme="{{ COLOR_THEME|default:'auto' }}" data-df-dark-theme="{{ DF_COLOR_THEMES.2.0 }}" data-df-light-theme="{{ DF_COLOR_THEMES.1.0 }}"{% endif %}>
+<html lang="{{ LANGUAGE_CODE }}" {% if DF_COLOR_THEMES %}data-bs-theme="{{ COLOR_THEME|default:'auto' }}"
+      data-df-dark-theme="{{ DF_COLOR_THEMES.2.0 }}" data-df-light-theme="{{ DF_COLOR_THEMES.1.0 }}"{% endif %}>
 <head>
     {% block head_meta_global %}
         <meta charset="utf-8">
@@ -18,7 +19,8 @@
         {% endif %}
         <meta property="twitter:site" content="{{ DF_SITE_X_ACCOUNT }}"/>
         <meta property="og:type" content="website"/>
-        <meta property="organization.name" content="{{ DF_SITE_ORGANIZATION }}"/>
+        {% if DF_SITE_ORGANIZATION %}
+            <meta property="organization.name" content="{{ DF_SITE_ORGANIZATION }}"/>{% endif %}
         <meta property="organization.logo" content="{% static 'favicon/apple-touch-icon.png' %}"/>
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
@@ -65,7 +67,7 @@
                 {% block navbar_content %}
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'index' %}">Home
+                            <a class="nav-link active" href="{% url 'index' %}">{% trans 'Home' %}
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -102,8 +104,11 @@
                     </form>
                 {% endblock navbar_search_form %}
                 {% block navbar_dark_mode %}
-                    <a class="btn btn-outline-light df-theme-switcher" href="{% url 'theme_switch' %}?current={{ COLOR_THEME }}&next={{ request.get_full_path | urlencode }}" title="{% trans 'Switch color theme' %}">
-                    {% for color_data in DF_COLOR_THEMES %}{% if color_data.0 == COLOR_THEME %}{% fa6_icon color_data.2 %}{% endif %}{% endfor %}
+                    <a class="btn btn-outline-light df-theme-switcher"
+                       href="{% url 'theme_switch' %}?current={{ COLOR_THEME }}&next={{ request.get_full_path | urlencode }}"
+                       title="{% trans 'Switch color theme' %}">
+                        {% for color_data in DF_COLOR_THEMES %}{% if color_data.0 == COLOR_THEME %}
+                            {% fa6_icon color_data.2 %}{% endif %}{% endfor %}
                     </a>
                 {% endblock navbar_dark_mode %}
                 {% block navbar_user %}
@@ -169,29 +174,37 @@
                 </div>
             </div>
         {% endblock body_modal %}
-        {% block body_footer %}
-            <footer id="footer">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="list-unstyled">
-                            <li class="float-end"><a href="#top">Back to top</a></li>
-                            <li><a href="https://blog.bootswatch.com/">Blog</a></li>
-                            <li><a href="https://blog.bootswatch.com/rss/">RSS</a></li>
-                            <li><a href="https://twitter.com/bootswatch">Twitter</a></li>
-                            <li><a href="https://github.com/thomaspark/bootswatch">GitHub</a></li>
-                            <li><a href="../help/#api">API</a></li>
-                            <li><a href="../help/#donate">Donate</a></li>
-                        </ul>
-                        <p>Made by <a href="https://thomaspark.co/">Thomas Park</a>.</p>
-                        <p>Code released under the <a
-                            href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT
-                            License</a>.</p>
-                        <p>Based on <a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a>. Icons from <a
-                            href="https://icons.getbootstrap.com/" rel="nofollow">Bootstrap Icons</a>. Web fonts from <a
-                            href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>
 
-                    </div>
+        {% block body_footer %}
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    {% block body_footer_copyright %}
+                        {% if DF_SITE_ORGANIZATION %}
+                            <a href="{% url 'index' %}"
+                               class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+
+                            </a>
+                            <span
+                                class="mb-3 mb-md-0 text-body-secondary">© {% now "Y" %} {{ DF_SITE_ORGANIZATION }}</span>
+                        {% endif %}
+                    {% endblock body_footer_copyright %}
                 </div>
+                <ul class="nav col-md4 ">
+                    {% block body_footer_links %}
+                        <li class="ms-3"><a href="{% url 'index' %}"
+                                            class="nav-link px-2 text-body-secondary">{% trans 'Home' %}</a></li>
+                    {% endblock body_footer_links %}
+                </ul>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    {% block body_footer_social %}
+                        {% for social in DF_SITE_SOCIAL_NETWORKS %}
+                            <li class="ms-3"><a class="text-body-secondary" href="{{ social.1 }}">
+                                {% fa6_icon social.0 prefix="fab" %}
+                            </a></li>
+                        {% endfor %}
+                    {% endblock body_footer_social %}
+                </ul>
             </footer>
         {% endblock body_footer %}
     </div>
