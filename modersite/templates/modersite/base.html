@@ -49,9 +49,9 @@
     {% block media_local %}
     {% endblock media_local %}
 </head>
-<body>
+<body class="{% block body_classes %}{% endblock %}">
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg sticky-top bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg sticky-top bg-primary">
         <div class="container">
             {% block navbar_site_title %}
                 <a class="navbar-brand" href="{% url 'index' %}">{{ PAGE_TITLE|default:DF_SITE_TITLE }}</a>
@@ -138,7 +138,8 @@
         {% endblock body_modal %}
 
         {% block body_footer %}
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
+            <footer
+                class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top fixed-bottom">
                 <div class="col-md-4 d-flex align-items-center">
                     {% block body_footer_copyright %}
                         {% if DF_SITE_ORGANIZATION %}
@@ -171,24 +172,24 @@
 
 
         {% endblock body_footer %}
-        {% block body_cookies %}
-             {% all_cookie_groups 'cookie-consent__cookie-groups' %}
-            <template id="cookie-consent__cookie-bar" data-df-cookies-status="{% url 'cookie_consent_status' %}">
-                <div class="container cookie-bar footer mt-auto py-3 bg-body-tertiary fixed-bottom">
-                    <p>
-                        {% trans "This site uses cookies for better performance and user experience. Do you agree to use these cookies?" %}</p>
-                    <div class="btn-group">
-                        <button type="button"
-                                class="btn btn-success cookie-consent__accept">{% trans 'Accept' %}</button>
-                        <button type="button"
-                                class="btn btn-danger cookie-consent__decline">{% trans 'Decline' %}</button>
-                        <a class="btn btn-secondary"
-                           href="{% url "cookie_consent_cookie_group_list" %}">{% trans 'Cookies info' %}</a>
-                    </div>
-                </div>
-            </template>
-       {% endblock body_cookies %}
     </div>
 {% endblock body %}
+{% block body_cookies %}
+    {% all_cookie_groups 'cookie-consent__cookie-groups' %}
+    <template id="cookie-consent__cookie-bar" data-df-cookies-status="{% url 'cookie_consent_status' %}">
+        <div class="container cookie-bar footer mt-auto py-3 bg-body-tertiary fixed-bottom">
+            <p>
+                {% trans "This site uses cookies for better performance and user experience. Do you agree to use these cookies?" %}</p>
+            <div class="btn-group">
+                <button type="button"
+                        class="btn btn-success cookie-consent__accept">{% trans 'Accept' %}</button>
+                <button type="button"
+                        class="btn btn-danger cookie-consent__decline">{% trans 'Decline' %}</button>
+                <a class="btn btn-secondary"
+                   href="{% url "cookie_consent_cookie_group_list" %}">{% trans 'Cookies info' %}</a>
+            </div>
+        </div>
+    </template>
+{% endblock body_cookies %}
 </body>
 </html>

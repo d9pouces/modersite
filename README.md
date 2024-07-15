@@ -43,7 +43,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] [Celery](https://docs.celeryproject.org/en/stable/)
 - [X] [Python3.12](https://www.python.org/)
 - [ ] [Django-allauth](https://django-allauth.readthedocs.io/en/latest/)
-- [ ] [DjangoCookieConsent](https://django-cookie-consent.readthedocs.io/en/latest/)
+- [X] [DjangoCookieConsent](https://django-cookie-consent.readthedocs.io/en/latest/)
 - [ ] [Django-auto-complete-light](https://django-autocomplete-light.readthedocs.io/en/master/)
 - [ ] [Django-htmX](https://django-htmx.readthedocs.io/en/latest/)
 - [ ] [Django-components](https://django-components.readthedocs.io/en/latest/)

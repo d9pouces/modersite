@@ -95,3 +95,9 @@ class DemoView(TemplateView):
         set_websocket_topics(self.request)
         messages.error(self.request, "This is an error message.")
         return context
+
+
+class PopupDemoView(TemplateView):
+    """Popup view with many Bootstrap functionnalities."""
+
+    template_name = "popup_demo.html"
