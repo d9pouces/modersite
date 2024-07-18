@@ -33,6 +33,7 @@ version = "0.1.0"
 df-config = ">=1.2.42"
 df-websockets = "^1.0.9"
 django = ">=5.0"
+django-allauth = {extras = ["mfa", "socialaccount"], version = "^0.63.6"}
 django-bootstrap5 = ">=23.3"
 django-cookie-consent = "^0.6.0"
 django-csp = "^3.7"
