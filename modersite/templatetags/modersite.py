@@ -11,6 +11,72 @@ from django.utils.safestring import mark_safe
 
 register = template.Library()
 
+BRAND_ICONS = {
+    "amazon": "amazon",
+    "amazon_cognito": "amazon",
+    "angellist": "angellist",
+    "apple": "apple",
+    "atlassian": "atlassian",
+    "battlenet": "battle-net",
+    "bitbucket_oauth2": "bitbucket",
+    "digitalocean": "digital-ocean",
+    "discord": "discord",
+    "dropbox": "dropbox",
+    "evernote": "evernote",
+    "facebook": "facebook",
+    "figma": "figma",
+    "fivehundredpx": "500px",
+    "flickr": "flickr",
+    "foursquare": "foursquare",
+    "github": "github",
+    "gitlab": "gitlab",
+    "google": "google",
+    "hubspot": "hubspot",
+    "instagram": "instagram",
+    "line": "line",
+    "linkedin_oauth2": "linkedin",
+    "mailchimp": "mailchimp",
+    "mailru": "",
+    "meetup": "meetup",
+    "microsoft": "microsoft",
+    "odnoklassniki": "odnoklassniki",
+    "openid": "openid",
+    "openid_connect": "openid",
+    "orcid": "orcid",
+    "patreon": "patreon",
+    "paypal": "paypal",
+    "pinterest": "pinterest",
+    "pocket": "get-pocket",
+    "reddit": "reddit",
+    "salesforce": "salesforce",
+    "shopify": "shopify",
+    "slack": "slack",
+    "snapchat": "snapchat",
+    "soundcloud": "soundcloud",
+    "spotify": "spotify",
+    "stackexchange": "stack-exchange",
+    "steam": "steam",
+    "strava": "strava",
+    "stripe": "stripe",
+    "telegram": "telegram",
+    "tiktok": "tiktok",
+    "trello": "trello",
+    "tumblr": "tumblr",
+    "twitch": "twitch",
+    "twitter": "twitter",
+    "twitter_oauth2": "twitter",
+    "untappd": "untappd",
+    "vimeo": "vimeo",
+    "vimeo_oauth2": "vimeo",
+    "vk": "vk",
+    "weibo": "weibo",
+    "weixin": "weixin",
+    "windowslive": "windows",
+    "xing": "xing",
+    "yahoo": "yahoo",
+    "yandex": "yandex",
+}
+
 
 @register.filter()
 def abs_url(value):
@@ -56,6 +122,12 @@ def abs_url_tag(parser, token):
         else:
             args.append(parser.compile_filter(value))
     return AbsoluteURLNode(viewname, args, kwargs, asvar)
+
+
+@register.filter
+def fa6_allauth_icon(provider_id):
+    """Return the font-awesome icon name for a given allauth provider."""
+    return BRAND_ICONS.get(provider_id, "key")
 
 
 @register.simple_tag

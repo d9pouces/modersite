@@ -7502,9 +7502,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_fortawesome_fontawesome_free_webfonts_fa_brands_400_ttf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf */ "./node_modules/.pnpm/@fortawesome+fontawesome-free@6.5.2/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf");
 /* harmony import */ var _node_modules_fortawesome_fontawesome_free_webfonts_fa_regular_400_ttf__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf */ "./node_modules/.pnpm/@fortawesome+fontawesome-free@6.5.2/node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf");
 /* harmony import */ var _node_modules_fortawesome_fontawesome_free_webfonts_fa_v4compatibility_ttf__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf */ "./node_modules/.pnpm/@fortawesome+fontawesome-free@6.5.2/node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.ttf");
-/* harmony import */ var _components_dark_mode__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/dark_mode */ "./modersite_js/components/dark_mode.ts");
-/* harmony import */ var _components_dark_mode__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_dark_mode__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_allauth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/allauth */ "./modersite_js/components/allauth.ts");
+/* harmony import */ var _components_allauth__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_allauth__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _components_cookies_consent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cookies_consent */ "./modersite_js/components/cookies_consent.ts");
+/* harmony import */ var _components_dark_mode__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/dark_mode */ "./modersite_js/components/dark_mode.ts");
+/* harmony import */ var _components_dark_mode__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_components_dark_mode__WEBPACK_IMPORTED_MODULE_11__);
+
 
 
 
@@ -7517,6 +7520,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import './htmx.js';
+
+
+/***/ }),
+
+/***/ "./modersite_js/components/allauth.ts":
+/*!********************************************!*\
+  !*** ./modersite_js/components/allauth.ts ***!
+  \********************************************/
+/***/ (() => {
+
+document.addEventListener("DOMContentLoaded", () => {
+    const allauthEmailRemoveTitleElt = document.getElementById("allauth-email-remove-title");
+    console.info(allauthEmailRemoveTitleElt);
+    if (allauthEmailRemoveTitleElt) {
+        const message = JSON.parse(allauthEmailRemoveTitleElt.textContent);
+        document.querySelectorAll('.btn-danger[name=action_remove]').forEach((action) => {
+            console.info(action);
+            action.addEventListener("click", function (e) {
+                if (!confirm(message)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+});
 
 
 /***/ }),
