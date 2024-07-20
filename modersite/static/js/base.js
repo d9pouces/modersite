@@ -7532,11 +7532,9 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener("DOMContentLoaded", () => {
     const allauthEmailRemoveTitleElt = document.getElementById("allauth-email-remove-title");
-    console.info(allauthEmailRemoveTitleElt);
     if (allauthEmailRemoveTitleElt) {
         const message = JSON.parse(allauthEmailRemoveTitleElt.textContent);
         document.querySelectorAll('.btn-danger[name=action_remove]').forEach((action) => {
-            console.info(action);
             action.addEventListener("click", function (e) {
                 if (!confirm(message)) {
                     e.preventDefault();

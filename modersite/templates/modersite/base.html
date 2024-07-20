@@ -72,7 +72,7 @@
                 {% endblock navbar_search_form %}
                 {% block navbar_dark_mode %}
                     <a class="btn btn-outline-light df-theme-switcher"
-                       href="{% url 'theme_switch' %}?current={{ COLOR_THEME }}&next={{ request.get_full_path | urlencode }}"
+                       href="{% url 'users:theme_switch' %}?current={{ COLOR_THEME }}&next={{ request.get_full_path | urlencode }}"
                        title="{% trans 'Switch color theme' %}">
                         {% for color_data in DF_COLOR_THEMES %}{% if color_data.0 == COLOR_THEME %}
                             {% fa6_icon color_data.2 %}{% endif %}{% endfor %}
@@ -84,15 +84,9 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false">{% fa6_icon 'user-circle' %}</a>
                         <span class="dropdown-menu">
-                {% url 'account_email' as email_url %}
-                {% url 'account_change_password' as change_password_url %}
-                {% url 'mfa_index' as mfa_url %}
-                {% url 'usersessions_list' as usersessions_list_url %}
                 {% url 'account_logout' as logout_url %}
-                            {% if change_password_url %}
                                 <a class="dropdown-item"
-                                   href="{{ change_password_url }}">{% trans "Settings" %}</a>
-                            {% endif %}
+                                   href="{% url 'users:settings' %}">{% trans "Settings" %}</a>
                             {% if logout_url %}
                                 <a class="dropdown-item" href="{{ logout_url }}">{% trans "Sign Out" %}</a>
                             {% endif %}
@@ -146,8 +140,8 @@
             </div>
         {% endblock body_banner %}
         <div class=" min-vh-100">
-        {% block body_content %}
-        {% endblock body_content %}
+            {% block body_content %}
+            {% endblock body_content %}
         </div>
 
         {% block body_modal %}

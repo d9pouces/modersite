@@ -48,6 +48,7 @@ DF_INSTALLED_APPS = [
     "modersite.app.ModersiteApp",
     "django_bootstrap5",
     "cookie_consent",
+    "postman",
     "allauth.mfa",
     "allauth.usersessions",
 ]
@@ -55,6 +56,8 @@ DF_MIDDLEWARE = [
     "allauth.usersessions.middleware.UserSessionsMiddleware",
 ]
 USERSESSIONS_TRACK_ACTIVITY = True
+POSTMAN_DISALLOW_ANONYMOUS = True
+POSTMAN_AUTO_MODERATE_AS = True
 AUTH_USER_MODEL = "modersite.PreferencesUser"
 COOKIE_CONSENT_SECURE = SettingReference("USE_SSL")
 COOKIE_CONSENT_DOMAIN = "{SERVER_NAME}"

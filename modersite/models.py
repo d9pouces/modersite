@@ -19,6 +19,9 @@ class AbstractPreferences(models.Model):
         verbose_name=_("Color theme"),
     )
     display_online = models.BooleanField(default=False, verbose_name=_("Display online status"), db_index=True)
+    email_notifications = models.BooleanField(
+        default=False, verbose_name=_("Receive notifications by email"), db_index=True
+    )
 
     class Meta:
         """Meta options for the model."""
