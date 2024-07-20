@@ -11,4 +11,10 @@ class UserSettingsForm(forms.ModelForm):
         """Meta options for the form."""
 
         model = get_user_model()
-        fields = ["first_name", "last_name", "color_theme", "email_notifications", "display_online"]
+        fields = [
+            "first_name",
+            "last_name",
+            "color_theme",
+            "email_notifications",
+            "display_online",
+        ]
