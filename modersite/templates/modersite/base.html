@@ -89,19 +89,9 @@
                 {% url 'mfa_index' as mfa_url %}
                 {% url 'usersessions_list' as usersessions_list_url %}
                 {% url 'account_logout' as logout_url %}
-                            {% if email_url %}
-                                <a class="dropdown-item" href="{{ email_url }}">{% trans "Change Email" %}</a>
-                            {% endif %}
                             {% if change_password_url %}
                                 <a class="dropdown-item"
-                                   href="{{ change_password_url }}">{% trans "Change Password" %}</a>
-                            {% endif %}
-                            {% if mfa_url %}
-                                <a class="dropdown-item"
-                                   href="{{ mfa_url }}">{% trans "Two-Factor Authentication" %}</a>
-                            {% endif %}
-                            {% if usersessions_list_url %}
-                                <a class="dropdown-item" href="{{ usersessions_list_url }}">{% trans "Sessions" %}</a>
+                                   href="{{ change_password_url }}">{% trans "Settings" %}</a>
                             {% endif %}
                             {% if logout_url %}
                                 <a class="dropdown-item" href="{{ logout_url }}">{% trans "Sign Out" %}</a>

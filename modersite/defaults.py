@@ -44,7 +44,17 @@ DF_TEMPLATE_CONTEXT_PROCESSORS = [
     "modersite.context_processors.global_site_infos",
     "django.template.context_processors.request",
 ]
-DF_INSTALLED_APPS = ["modersite.app.ModersiteApp", "django_bootstrap5", "cookie_consent"]
+DF_INSTALLED_APPS = [
+    "modersite.app.ModersiteApp",
+    "django_bootstrap5",
+    "cookie_consent",
+    "allauth.mfa",
+    "allauth.usersessions",
+]
+DF_MIDDLEWARE = [
+    "allauth.usersessions.middleware.UserSessionsMiddleware",
+]
+USERSESSIONS_TRACK_ACTIVITY = True
 AUTH_USER_MODEL = "modersite.PreferencesUser"
 COOKIE_CONSENT_SECURE = SettingReference("USE_SSL")
 COOKIE_CONSENT_DOMAIN = "{SERVER_NAME}"
@@ -92,3 +102,5 @@ PIPELINE = {
     "JS_COMPRESSOR": "pipeline.compressors.uglifyjs.UglifyJSCompressor",
     "COMPILERS": [],
 }
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_LOGIN_ON_GET = True

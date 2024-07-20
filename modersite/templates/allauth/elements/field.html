@@ -1,12 +1,12 @@
 {% load allauth %}
 {{ attrs.errors }}
 {% if attrs.type == "textarea" %}
-    <p>
+    <p class="px-3">
         <label for="{{ attrs.id }}">
             {% slot label %}
             {% endslot %}
         </label>
-        <textarea class="form-control"
+        <textarea class="form-control font-monospace"
                   {% if attrs.required %}required{% endif %}
                   {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
                   {% if attrs.disabled %}disabled{% endif %}
@@ -47,7 +47,7 @@
         {% endif %}
     </p>
 {% else %}
-    <p>
+    <p class="{% if attrs.readonly or attrs.disabled%}{% else %}form-floating{% endif %}">
         <label for="{{ attrs.id }}" class="form-label">
             {% slot label %}
             {% endslot %}
