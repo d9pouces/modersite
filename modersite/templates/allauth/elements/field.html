@@ -6,7 +6,7 @@
             {% slot label %}
             {% endslot %}
         </label>
-        <textarea class="form-control font-monospace"
+        <textarea class="form-control{% if attrs.monospace %} font-monospace{% endif %}"
                   {% if attrs.required %}required{% endif %}
                   {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
                   {% if attrs.disabled %}disabled{% endif %}

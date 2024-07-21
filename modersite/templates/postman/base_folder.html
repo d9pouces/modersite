@@ -1,5 +1,5 @@
 {% extends "postman/base.html" %}
-{% load i18n postman_tags allauth modersite %}{% load pagination_tags %}{% comment %}
+{% load i18n postman_tags allauth modersite pagination_tags %}{% comment %}
 WARNING: 'pagination_tags' is a name from the dj-pagination application.
 For convenience, the design of this template is done with the use of that application.
 Django-postman will still be working, even if that application is not installed, by providing a mock
@@ -10,7 +10,8 @@ in the INSTALLED_APPS setting.
 {% block content %}
 <div id="postman">
 <h1 class="card-header text-center">{% block pm_folder_title %}{% endblock %}</h1>
-{% autopaginate pm_messages %}
+
+    {% autopaginate pm_messages %}
 {% if invalid_page %}
 <p class="alert alert-danger">{% trans "Sorry, this page number is invalid." %}</p>
 {% else %}
@@ -48,7 +49,8 @@ in the INSTALLED_APPS setting.
 {% block pm_subject %}
     <a href="{% if by_conversation and message.thread_id %}{% url 'postman:view_conversation' message.thread_id %}{% else %}{% url 'postman:view' message.pk %}{% endif %}?next={{ current_url|urlencode }}">
     {% include "postman/inc_subject_ex.html" %}
-    </a>
+    </a><br>
+    {% if message.body %}<small class="text-body-tertiary">{{ message.body|truncatewords:7 }}</small>{% endif %}
 {% endblock %}
    {% if message.is_replied %}</em>{% endif %}{% if message.is_new %}</strong>{% endif %}</td>
    <td>{{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</td>

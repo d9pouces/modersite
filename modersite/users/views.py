@@ -103,13 +103,7 @@ def theme_switch(request: HttpRequest) -> HttpResponse:
     # noinspection PyTypeChecker
     current_theme: str = request.GET.get("current", "auto")
     # noinspection PyTypeChecker
-    redirect_to: str = request.GET.get("next", "/")
-    if not url_has_allowed_host_and_scheme(
-        url=redirect_to,
-        allowed_hosts={request.get_host()},
-        require_https=request.is_secure(),
-    ):
-        redirect_to = "/"
+    redirect_to = sanitize_redirection(request)
 
     if settings.DF_SITE_THEMES:
         next_theme, __, next_icon = settings.DF_SITE_THEMES[-1]
@@ -128,3 +122,15 @@ def theme_switch(request: HttpRequest) -> HttpResponse:
         response = HttpResponseRedirect(redirect_to)
     set_user_setting("color_theme", next_theme, request=request, response=response)
     return response
+
+
+def sanitize_redirection(request, param="next"):
+    """Sanitize the redirection URL, only keeping allowed hosts."""
+    redirect_to: str = request.GET.get(param, "/")
+    if not url_has_allowed_host_and_scheme(
+        url=redirect_to,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        redirect_to = "/"
+    return redirect_to

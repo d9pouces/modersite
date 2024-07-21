@@ -19,6 +19,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [X] [Dark Mode](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
 - [ ] [Htmx](https://htmx.org/)
 - [ ] [Select2](https://select2.org/): still use jQuery in 2024 and no real plan to remove it
+- [ ] Javascript editor
 
 ### Excluded
 - [X] [Vite](https://vitejs.dev/): created SPA
@@ -38,6 +39,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [X] [Poetry](https://python-poetry.org/)
 - [X] [Python3.12](https://www.python.org/)
 - [X] [DjangoCookieConsent](https://django-cookie-consent.readthedocs.io/en/latest/)
+- [X] [Django-postman](https://django-postman.readthedocs.io/en/latest/)
 - [ ] [Django-allauth](https://docs.allauth.org/en/latest/)
 - [ ] [Django Rest Framework](https://www.django-rest-framework.org/)
 - [ ] [Django Channels](https://channels.readthedocs.io/en/stable/)
