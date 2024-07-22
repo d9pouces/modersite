@@ -21966,6 +21966,15 @@ readers do not read off random characters that represent icons */
   font-weight: 400;
 }
 
+.ck.ck-editor__editable_inline {
+  border-left: none;
+  border-right: none;
+}
+
+.ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+  border: none;
+}
+
 .alert-ribbon {
   width: 12.1em;
   height: 12.1em;

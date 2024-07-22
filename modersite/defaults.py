@@ -48,8 +48,8 @@ DF_TEMPLATE_CONTEXT_PROCESSORS = [
     "django.template.context_processors.request",
 ]
 DF_INSTALLED_APPS = [
-    "modersite.app.ModersiteApp",
     "django_bootstrap5",
+    "modersite.app.ModersiteApp",
     "cookie_consent",
     "postman",
     "allauth.mfa",
@@ -93,8 +93,8 @@ PIPELINE = {
     "STYLESHEETS": {
         "base": {
             "source_filenames": [
-                "css/base.css",
                 "django_ckeditor_5/dist/styles.css",
+                "css/base.css",
             ],
             "output_filename": "css/base.min.css",
             "extra_context": {"media": "all"},
@@ -128,6 +128,22 @@ CKEDITOR_5_CONFIGS = {
             "numberedList",
             "blockQuote",
             "imageUpload",
+        ],
+    },
+    "postman": {
+        "toolbar": [
+            "bold",
+            "italic",
+            "link",
+            "underline",
+            "strikethrough",
+            "code",
+            "subscript",
+            "superscript",
+            "highlight",
+            "bulletedList",
+            "numberedList",
+            "blockQuote",
         ],
     },
     "comment2": {
