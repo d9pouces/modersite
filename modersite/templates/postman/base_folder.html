@@ -1,5 +1,5 @@
 {% extends "postman/base.html" %}
-{% load i18n postman_tags allauth modersite pagination_tags %}{% comment %}
+{% load i18n postman_tags allauth modersite pagination_tags django_bootstrap5 %}{% comment %}
 WARNING: 'pagination_tags' is a name from the dj-pagination application.
 For convenience, the design of this template is done with the use of that application.
 Django-postman will still be working, even if that application is not installed, by providing a mock
@@ -11,7 +11,6 @@ in the INSTALLED_APPS setting.
 <div id="postman">
 <h1 class="card-header text-center">{% block pm_folder_title %}{% endblock %}</h1>
 
-    {% autopaginate pm_messages %}
 {% if invalid_page %}
 <p class="alert alert-danger">{% trans "Sorry, this page number is invalid." %}</p>
 {% else %}
@@ -21,7 +20,7 @@ in the INSTALLED_APPS setting.
     <li class="pm_by-mode nav-item"><a class="nav-link{% if by_message %} active disabled{% else %}{% endif %}" href="{{ by_message_url }}">{% trans "by message" %}</a></li>
 </ul>
 {% endblock pm_by_modes %}
-<form class="card-body" action="{% block pm_form_action %}{% url 'users:update-message' %}{% endblock %}" method="post">{% csrf_token %}
+<form class="card-body" action="{% block pm_form_action %}{% url 'postman:update-message' %}{% endblock %}" method="post">{% csrf_token %}
 
     {% block pm_form_buttons %}<div id="pm_buttons" class="btn-group">
 {% block pm_delete_button %}<button name="action" value="delete" type="submit" class="btn btn-sm btn-danger pm_btn pm_btn-delete" >{% trans "Delete" %}</button>{% endblock %}
@@ -40,7 +39,8 @@ in the INSTALLED_APPS setting.
    <th><a class="d-block nav-link" href="{% postman_order_by date %}">{% block pm_date %}{% trans "Date" %}{% endblock %} <span class="float-end">{% fa6_icon 'sort' %}</span></a></th>
   </tr>
  </thead>
- <tbody>{% for message in pm_messages %}
+{% paginate_qs pm_messages per_page=10 as pm_messages_p %}
+ <tbody>{% for message in pm_messages_p %}
   <tr>
    <td><input type="checkbox" {% if by_conversation and message.thread_id %}name="tpks" value="{{ message.thread_id }}"{% else %}name="pks" value="{{ message.pk }}"{% endif %}></td>
 {% block pm_sender_cell %}   <td>{{ message.obfuscated_sender|or_me:user }}{% if message.count %} ({{ message.count }}){% endif %}</td>{% endblock %}
@@ -57,8 +57,9 @@ in the INSTALLED_APPS setting.
   </tr>{% endfor %}
  </tbody>
 </table>
+{% bootstrap_pagination pm_messages_p size='sm' justify_content='center' %}
+
 </form>
-{% paginate %}
 {% else %}
     {% element p %}
         {% trans "No messages." %}

@@ -22056,3 +22056,43 @@ readers do not read off random characters that represent icons */
 .alert-ribbon.left-top:before, .alert-ribbon.left-top:after, .alert-ribbon.right-bottom:before, .alert-ribbon.right-bottom:after {
   transform: rotate(-45deg);
 }
+
+.va-1 {
+  height: 2em;
+}
+
+.va-2 {
+  height: 4em;
+}
+
+.va-3 {
+  height: 6em;
+}
+
+.va-4 {
+  height: 8em;
+}
+
+.va-5 {
+  height: 10em;
+}
+
+.va-6 {
+  height: 12em;
+}
+
+.va-7 {
+  height: 14em;
+}
+
+.va-8 {
+  height: 16em;
+}
+
+.va-9 {
+  height: 18em;
+}
+
+.va-10 {
+  height: 20em;
+}

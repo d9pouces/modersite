@@ -4,78 +4,15 @@ from typing import Union
 
 from django import template
 from django.conf import settings
+from django.core.paginator import Paginator
 from django.template.base import kwarg_re
 from django.template.defaulttags import URLNode
 from django.template.exceptions import TemplateSyntaxError
 from django.utils.safestring import mark_safe
 
-register = template.Library()
+from modersite.constants import BRAND_ICONS, INT_RE
 
-BRAND_ICONS = {
-    "amazon": "amazon",
-    "amazon_cognito": "amazon",
-    "angellist": "angellist",
-    "apple": "apple",
-    "atlassian": "atlassian",
-    "battlenet": "battle-net",
-    "bitbucket_oauth2": "bitbucket",
-    "digitalocean": "digital-ocean",
-    "discord": "discord",
-    "dropbox": "dropbox",
-    "evernote": "evernote",
-    "facebook": "facebook",
-    "figma": "figma",
-    "fivehundredpx": "500px",
-    "flickr": "flickr",
-    "foursquare": "foursquare",
-    "github": "github",
-    "gitlab": "gitlab",
-    "google": "google",
-    "hubspot": "hubspot",
-    "instagram": "instagram",
-    "line": "line",
-    "linkedin_oauth2": "linkedin",
-    "mailchimp": "mailchimp",
-    "mailru": "",
-    "meetup": "meetup",
-    "microsoft": "microsoft",
-    "odnoklassniki": "odnoklassniki",
-    "openid": "openid",
-    "openid_connect": "openid",
-    "orcid": "orcid",
-    "patreon": "patreon",
-    "paypal": "paypal",
-    "pinterest": "pinterest",
-    "pocket": "get-pocket",
-    "reddit": "reddit",
-    "salesforce": "salesforce",
-    "shopify": "shopify",
-    "slack": "slack",
-    "snapchat": "snapchat",
-    "soundcloud": "soundcloud",
-    "spotify": "spotify",
-    "stackexchange": "stack-exchange",
-    "steam": "steam",
-    "strava": "strava",
-    "stripe": "stripe",
-    "telegram": "telegram",
-    "tiktok": "tiktok",
-    "trello": "trello",
-    "tumblr": "tumblr",
-    "twitch": "twitch",
-    "twitter": "twitter",
-    "twitter_oauth2": "twitter",
-    "untappd": "untappd",
-    "vimeo": "vimeo",
-    "vimeo_oauth2": "vimeo",
-    "vk": "vk",
-    "weibo": "weibo",
-    "weixin": "weixin",
-    "windowslive": "windows",
-    "xing": "xing",
-    "yahoo": "yahoo",
-    "yandex": "yandex",
-}
+register = template.Library()
 
 
 @register.filter()
@@ -95,6 +32,18 @@ class AbsoluteURLNode(URLNode):
     def render(self, context):
         """Render the URL node prefixed with the server base URL."""
         return abs_url(super().render(context))
+
+
+@register.simple_tag(takes_context=True)
+def paginate_qs(context, queryset, per_page=10, page_attr="page"):
+    """Paginate a queryset and store the pagination in the context."""
+    paginator = Paginator(queryset, per_page)
+    page_number = context["request"].GET.get(page_attr, "1")
+    if INT_RE.match(page_number):
+        page = paginator.get_page(int(page_number))
+    else:
+        page = paginator.get_page(1)
+    return page
 
 
 @register.tag(name="abs_url")

@@ -49,6 +49,8 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] [Django-auto-complete-light](https://django-autocomplete-light.readthedocs.io/en/master/)
 - [ ] [Django-htmX](https://django-htmx.readthedocs.io/en/latest/)
 - [ ] [Django-components](https://django-components.readthedocs.io/en/latest/)
+- [ ] [django-ckeditor](https://django-ckeditor.readthedocs.io/en/latest/)
+- [ ] [Django-recaptcha](https://pypi.org/project/django-recaptcha/)
 - [ ] Complete solution for ListView, DetailView, CreateView, UpdateView, DeleteView
 - [ ] alert messages when the site is offline (maintenance mode)
 - [ ] wait for the database to be ready
@@ -58,6 +60,17 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 ### Excluded
 
 - [X] [Django-select2](https://django-select2.readthedocs.io/en/latest/): django-auto-complete-light is better
+
+## WYSIWYG editor
+
+- [X] [CKEditor](https://ckeditor.com/) with [django-ckeditor-5](https://github.com/hvlads/django-ckeditor-5): GPL license
+- [X] [TinyMCE](https://www.tiny.cloud/) with [django-tinymce](https://django-tinymce.readthedocs.io/en/latest/): cannot use a strong CSP (unsafe-inline styles are required)
+- [X] [Trix](https://trix-editor.org/) with [django-prose](https://github.com/withlogicco/django-prose): use nonce for inline styles
+- [X] [summernote](https://summernote.org/) with [django-summernote](https://github.com/summernote/django-summernote): still use jQuery and cannot use a strong CSP
+- [X] [Froala](https://www.froala.com/wysiwyg-editor): expensive
+- [X] [ACE](https://ace.c9.io/): code editor
+- [X] [Django-RichtextField](https://github.com/jaap3/django-richtextfield): use CKEditor or TinyMCE
+
 
 ## HTML and web server
 
