@@ -8,6 +8,7 @@
   },
   "description": "",
   "devDependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^42.0.2",
     "@eslint/js": "^9.6.0",
     "@types/webpack-env": "^1.18.5",
     "css-loader": "^7.1.2",

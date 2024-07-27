@@ -22,7 +22,7 @@
                     <div class="pm_status alert alert-danger px-3 py-1 border-bottom"><strong>{% trans "Rejected" %}</strong>{% if message.moderation_reason %}{% trans ":" %}
                         {{ message.moderation_reason }}{% endif %}</div>
                 {% endif %}
-                <div class="card-body p-3 pm_body ">{{ message.body|linebreaksbr }}</div>
+                <div class="card-body p-3 pm_body ">{{ message.body|safe }}</div>
             </div>
             {% if forloop.last %}
                 {% bootstrap_pagination pm_messages_p size='sm' justify_content='center' %}

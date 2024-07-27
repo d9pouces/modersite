@@ -30,6 +30,7 @@ repository = 'https://github.com/d9pouces/modersite'
 version = "0.1.0"
 
 [tool.poetry.dependencies]
+bleach = "^6.1.0"
 df-config = ">=1.2.42"
 df-websockets = "^1.0.9"
 django = ">=5.0"

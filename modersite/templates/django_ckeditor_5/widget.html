@@ -1,8 +1,7 @@
 {% load django_bootstrap5 %}
-<div class="ck-editor-container form-control p-0">
-<textarea name="{{ widget.name }}" {% include 'django/forms/widgets/attrs.html' %}>
-{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
-    <div class="word-count m-0 " id="{{ script_id }}-word-count"></div>
+<div class="ck-editor-container form-control p-0{% if 'ck-editor__singleline' in widget.attrs.class %} ck-editor__singleline{% endif %}{% if 'is-valid' in widget.attrs.class %} is-valid{% elif 'is-invalid' in widget.attrs.class %} is-invalid{% endif %}">
+<textarea name="{{ widget.name }}" {% include 'django/forms/widgets/attrs.html' %}>{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
+    <div class="word-count d-none" id="{{ script_id }}-word-count"></div>
     {% if errors %}
         {% for text in errors %}
             <div class="invalid-feedback">{{ text }}</div>

@@ -58,6 +58,27 @@ DF_INSTALLED_APPS = [
 ]
 DF_MIDDLEWARE = [
     "allauth.usersessions.middleware.UserSessionsMiddleware",
+    "df_websockets.middleware.WebsocketMiddleware",
+    "modersite.middleware.websocket_middleware",
+]
+MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "df_config.apps.middleware.DFConfigMiddleware",
+    "allauth.usersessions.middleware.UserSessionsMiddleware",
+    "df_websockets.middleware.WebsocketMiddleware",
+    "modersite.middleware.websocket_middleware",
+    "csp.middleware.CSPMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 USERSESSIONS_TRACK_ACTIVITY = True
 POSTMAN_DISALLOW_ANONYMOUS = True
@@ -116,7 +137,74 @@ PIPELINE = {
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
+CKEDITOR_5_USER_LANGUAGE = True
 CKEDITOR_5_CONFIGS = {
+    "inline": {
+        "toolbar": [
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "subscript",
+            "superscript",
+            "|",
+            "removeFormat",
+        ],
+        "plugins": [
+            "Essentials",
+            "Autoformat",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strikethrough",
+            "Code",
+            "Subscript",
+            "Superscript",
+            # "Link",
+            "Paragraph",
+            "Font",
+            "PasteFromOffice",
+            "RemoveFormat",
+            "Highlight",
+            "SpecialCharacters",
+            "ShowBlocks",
+            "SelectAll",
+        ],
+    },
+    "inline_link": {
+        "toolbar": [
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "subscript",
+            "superscript",
+            "|",
+            "link",
+            "|",
+            "removeFormat",
+        ],
+        "plugins": [
+            "Essentials",
+            "Autoformat",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strikethrough",
+            "Code",
+            "Subscript",
+            "Superscript",
+            "Link",
+            "Paragraph",
+            "Font",
+            "PasteFromOffice",
+            "RemoveFormat",
+            "Highlight",
+            "SpecialCharacters",
+            "ShowBlocks",
+            "SelectAll",
+        ],
+    },
     "default": {
         "toolbar": [
             "heading",
@@ -145,6 +233,24 @@ CKEDITOR_5_CONFIGS = {
             "numberedList",
             "blockQuote",
         ],
+        "image": {
+            "toolbar": [
+                "imageTextAlternative",
+                "|",
+                "imageStyle:alignLeft",
+                "imageStyle:alignRight",
+                "imageStyle:alignCenter",
+                "imageStyle:side",
+                "|",
+            ],
+            "styles": [
+                "full",
+                "side",
+                "alignLeft",
+                "alignRight",
+                "alignCenter",
+            ],
+        },
     },
     "comment2": {
         "toolbar": [

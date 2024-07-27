@@ -18,4 +18,4 @@ With subject: "a subject of great interest for you":
 With subject: "a great interest":
 "a great interest - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed ..."
 
-{% endcomment %}{% load postman_tags %}{% with message.subject|truncatewords:8 as truncated_subject %}{{ truncated_subject }}{% endwith %}
+{% endcomment %}{% load postman_tags %}{% with message.subject|truncatewords_html:8 as truncated_subject %}{{ truncated_subject|safe }}{% endwith %}

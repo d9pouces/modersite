@@ -2,37 +2,37 @@
 
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django_ckeditor_5.widgets import CKEditor5Widget
 from postman.forms import AnonymousWriteForm, FullReplyForm, QuickReplyForm, WriteForm
 
+from modersite.form_fields import CKEditor5Field
 
-class HTMLWriteForm(WriteForm):
+
+class CKEditor5Form(forms.Form):
+    """Form with a CKEditor 5 widget."""
+
+    body = CKEditor5Field(label=_("body"), required=True, config_name="postman")
+    subject = CKEditor5Field(label=_("subject"), required=True, config_name="inline")
+
+
+class HTMLWriteForm(CKEditor5Form, WriteForm):
     """Form used by authenticated users."""
 
-    body = forms.CharField(
-        widget=CKEditor5Widget(attrs={"class": "django_ckeditor_5"}, config_name="postman"), label=_("body")
-    )
+    pass
 
 
-class HTMLAnonymousWriteForm(AnonymousWriteForm):
+class HTMLAnonymousWriteForm(CKEditor5Form, AnonymousWriteForm):
     """Form used by anonymous users."""
 
-    body = forms.CharField(
-        widget=CKEditor5Widget(attrs={"class": "django_ckeditor_5"}, config_name="postman"), label=_("body")
-    )
+    pass
 
 
-class HTMLFullReplyForm(FullReplyForm):
+class HTMLFullReplyForm(CKEditor5Form, FullReplyForm):
     """Form for complete Postman replies."""
 
-    body = forms.CharField(
-        widget=CKEditor5Widget(attrs={"class": "django_ckeditor_5"}, config_name="postman"), label=_("body")
-    )
+    pass
 
 
-class HTMLQuickReplyForm(QuickReplyForm):
+class HTMLQuickReplyForm(CKEditor5Form, QuickReplyForm):
     """Form for postman quick replies."""
 
-    body = forms.CharField(
-        widget=CKEditor5Widget(attrs={"class": "django_ckeditor_5"}, config_name="postman"), label=_("body")
-    )
+    pass
