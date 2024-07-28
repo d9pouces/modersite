@@ -56,6 +56,7 @@ https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/clien
 - [ ] wait for the database to be ready
 - [ ] display global messages and banners
 - [ ] Error templates
+- [ ] Smileys in the Editor
 
 ### Excluded
 

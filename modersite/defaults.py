@@ -93,7 +93,11 @@ PIPELINE = {
     "PIPELINE_ENABLED": SettingReference("PIPELINE_ENABLED"),
     "JAVASCRIPT": {
         "base": {
-            "source_filenames": ["js/base.js", "js/df_websockets.min.js", "django_ckeditor_5/dist/bundle.js"],
+            "source_filenames": [
+                "js/base.js",
+                "js/df_websockets.min.js",
+                # "django_ckeditor_5/dist/bundle.js"
+            ],
             "output_filename": "js/base.min.js",
             #            "integrity": "sha384",
             "crossorigin": "anonymous",
@@ -114,7 +118,8 @@ PIPELINE = {
     "STYLESHEETS": {
         "base": {
             "source_filenames": [
-                "django_ckeditor_5/dist/styles.css",
+                "django_ckeditor_5/src/override-django.css",
+                "css/ckeditor5.css",
                 "css/base.css",
             ],
             "output_filename": "css/base.min.css",
@@ -138,8 +143,15 @@ SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 CKEDITOR_5_USER_LANGUAGE = True
+special_chars = [
+    {"title": _("smiley face"), "character": "😊"},
+    {"title": _("smiley face"), "character": ":)"},
+]
+CK_EDITOR_5_UPLOAD_FILE_VIEW = "django_ckeditor_5.views.upload_file"
+CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "upload_file"
 CKEDITOR_5_CONFIGS = {
     "inline": {
+        "specialChars": special_chars,
         "toolbar": [
             "bold",
             "italic",
@@ -148,6 +160,7 @@ CKEDITOR_5_CONFIGS = {
             "subscript",
             "superscript",
             "|",
+            "specialCharacters",
             "removeFormat",
         ],
         "plugins": [
@@ -160,18 +173,19 @@ CKEDITOR_5_CONFIGS = {
             "Code",
             "Subscript",
             "Superscript",
-            # "Link",
             "Paragraph",
             "Font",
             "PasteFromOffice",
             "RemoveFormat",
             "Highlight",
             "SpecialCharacters",
+            "SpecialCharactersEssentials",
             "ShowBlocks",
             "SelectAll",
         ],
     },
     "inline_link": {
+        "specialChars": special_chars,
         "toolbar": [
             "bold",
             "italic",
@@ -179,9 +193,9 @@ CKEDITOR_5_CONFIGS = {
             "strikethrough",
             "subscript",
             "superscript",
-            "|",
             "link",
             "|",
+            "specialCharacters",
             "removeFormat",
         ],
         "plugins": [
@@ -201,120 +215,40 @@ CKEDITOR_5_CONFIGS = {
             "RemoveFormat",
             "Highlight",
             "SpecialCharacters",
+            "SpecialCharactersEssentials",
             "ShowBlocks",
             "SelectAll",
         ],
     },
     "default": {
+        "specialChars": special_chars,
         "toolbar": [
             "heading",
-            "|",
-            "bold",
-            "italic",
-            "link",
             "bulletedList",
             "numberedList",
             "blockQuote",
-            "imageUpload",
-        ],
-    },
-    "postman": {
-        "toolbar": [
+            "|",
             "bold",
             "italic",
-            "link",
             "underline",
             "strikethrough",
-            "code",
             "subscript",
             "superscript",
-            "highlight",
-            "bulletedList",
-            "numberedList",
-            "blockQuote",
-        ],
-        "image": {
-            "toolbar": [
-                "imageTextAlternative",
-                "|",
-                "imageStyle:alignLeft",
-                "imageStyle:alignRight",
-                "imageStyle:alignCenter",
-                "imageStyle:side",
-                "|",
-            ],
-            "styles": [
-                "full",
-                "side",
-                "alignLeft",
-                "alignRight",
-                "alignCenter",
-            ],
-        },
-    },
-    "comment2": {
-        "toolbar": [
-            "heading",
-            "|",
-            "bold",
-            "italic",
             "link",
-            "bulletedList",
-            "numberedList",
-            "blockQuote",
-            "imageUpload",
-        ],
-    },
-    "extends": {
-        "blockToolbar": [
-            "paragraph",
-            "heading1",
-            "heading2",
-            "heading3",
-            "|",
-            "bulletedList",
-            "numberedList",
-            "|",
-            "blockQuote",
-        ],
-        "toolbar": [
-            "heading",
-            "|",
-            "outdent",
-            "indent",
-            "|",
-            "bold",
-            "italic",
-            "link",
-            "underline",
-            "strikethrough",
-            "code",
-            "subscript",
-            "superscript",
             "highlight",
             "|",
-            "codeBlock",
-            "sourceEditing",
-            "insertImage",
-            "bulletedList",
-            "numberedList",
-            "todoList",
-            "|",
-            "blockQuote",
-            "imageUpload",
-            "|",
-            "fontSize",
-            "fontFamily",
-            "fontColor",
-            "fontBackgroundColor",
-            "mediaEmbed",
-            "removeFormat",
             "insertTable",
+            "insertImage",
+            "specialCharacters",
+            "removeFormat",
+            "undo",
+            "redo",
         ],
         "image": {
             "toolbar": [
                 "imageTextAlternative",
                 "|",
+                "imageStyle:full",
                 "imageStyle:alignLeft",
                 "imageStyle:alignRight",
                 "imageStyle:alignCenter",
@@ -329,23 +263,10 @@ CKEDITOR_5_CONFIGS = {
                 "alignCenter",
             ],
         },
+        "list": {"properties": {"styles": False, "startIndex": True, "reversed": True}},
         "table": {
-            "contentToolbar": ["tableColumn", "tableRow", "mergeTableCells", "tableProperties", "tableCellProperties"],
+            "defaultHeadings": {"rows": 1, "columns": 1},
+            "contentToolbar": ["tableColumn", "tableRow", "mergeTableCells"],
         },
-        "heading": {
-            "options": [
-                {"model": "paragraph", "title": "Paragraph", "class": "ck-heading_paragraph"},
-                {"model": "heading1", "view": "h1", "title": "Heading 1", "class": "ck-heading_heading1"},
-                {"model": "heading2", "view": "h2", "title": "Heading 2", "class": "ck-heading_heading2"},
-                {"model": "heading3", "view": "h3", "title": "Heading 3", "class": "ck-heading_heading3"},
-            ]
-        },
-    },
-    "list": {
-        "properties": {
-            "styles": "true",
-            "startIndex": "true",
-            "reversed": "true",
-        }
     },
 }

@@ -10,7 +10,7 @@ from modersite.form_fields import CKEditor5Field
 class CKEditor5Form(forms.Form):
     """Form with a CKEditor 5 widget."""
 
-    body = CKEditor5Field(label=_("body"), required=True, config_name="postman")
+    body = CKEditor5Field(label=_("body"), required=True, config_name="default")
     subject = CKEditor5Field(label=_("subject"), required=True, config_name="inline")
 
 

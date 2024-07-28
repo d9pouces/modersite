@@ -1,4 +1,7 @@
 const path = require('path');
+const { styles } = require( '@ckeditor/ckeditor5-dev-utils' );
+const { CKEditorTranslationsPlugin } = require( '@ckeditor/ckeditor5-dev-translations' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = {
     entry: {
@@ -21,7 +24,23 @@ module.exports = {
     optimization: {
         minimize: false
     },
+    plugins: [
+        new CKEditorTranslationsPlugin( {
+            // The main language that will be built into the main bundle.
+            language: 'fr',
 
+            // Additional languages that will be emitted to the `outputDirectory`.
+            // This option can be set to an array of language codes or `'all'` to build all found languages.
+            // The bundle is optimized for one language when this option is omitted.
+            additionalLanguages: 'all',
+            addMainLanguageTranslationsToAllAssets: true,
+
+            // For more advanced options see https://github.com/ckeditor/ckeditor5-dev/tree/master/packages/ckeditor5-dev-translations.
+        } ),
+        new MiniCssExtractPlugin( {
+            filename: 'css/ckeditor5.css'
+        } )
+    ],
     module: {
         rules: [
             {
@@ -40,9 +59,34 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/,
+                test: /\.(png|jpg|jpeg|gif)$/,
                 type: 'asset/resource',
+                generator: {filename: 'images/[name][ext][query]'},
             },
+            {
+                test: /\.(svg)$/,
+                use: [ 'raw-loader' ],
+            },
+                      {
+                test: /\.css$/,
+
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: styles.getPostCssConfig( {
+                                themeImporter: {
+                                    themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
+                                },
+                                minify: true
+                            } )
+                        }
+                    }
+                ]
+            },
+
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,

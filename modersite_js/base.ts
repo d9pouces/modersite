@@ -10,5 +10,6 @@ import '../node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibilit
 import "./components/allauth";
 import "./components/cookies_consent";
 import "./components/dark_mode";
+import "./components/ckeditor";
 
 // import './htmx.js';

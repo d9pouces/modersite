@@ -12,7 +12,7 @@ repos:
   - id: check-toml
     exclude: ^(node_modules/.*)
   - id: check-yaml
-    exclude: ^(node_modules/.*)
+    exclude: ^(node_modules/.*|pnpm-lock.yaml)
   - id: check-xml
     exclude: ^(node_modules/.*)
   - id: check-added-large-files
