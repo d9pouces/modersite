@@ -30,15 +30,34 @@
     transform: rotate(45deg);
 }
 
+.alert-ribbon-tricolor:before {
+    /*    background-color: #a00; */
+    background: linear-gradient(to bottom, #002654 27%, #fff 0, #fff 73%, #ED2939 0);
+    color: $dark;
+}
+.alert-ribbon-tricolor:after {
+    /*    background-color: #a00; */
+    color: $dark;
+}
+
+@each $color, $value in $theme-colors {
+    .alert-ribbon-#{$color}:before {
+        background: $value;
+        color: color-contrast($value);
+    }
+    .alert-ribbon-#{$color}:after {
+        background: $value;
+        color: color-contrast($value);
+        border-color: color-contrast($value);
+    }
+}
+
 .alert-ribbon:before {
     content: "";
     padding: .38em 0;
 
-/*    background-color: #a00; */
-    background: linear-gradient(to bottom, #002654 27%, #fff 0, #fff 73%, #ED2939 0);
-
     /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
-/*    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)); */
+    /*    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)); */
 
     /* Add a drop shadow */
     box-shadow: 0 .15em .23em 0 rgba(0, 0, 0, 0.5);
@@ -51,7 +70,6 @@
     content: attr(data-ribbon);
 
     /* Set the text properties */
-    color: #222;
     font-family: var(--#{$prefix}body-font-family);
 
     line-height: 1.54em;
@@ -67,8 +85,7 @@
     /* Add "stitching" effect */
     border-width: .08em 0;
     border-style: dotted;
-    border-color: $light;
-    border-color: rgba(255, 255, 255, 0.7);
+    /* border-color: rgba(255, 255, 255, 0.7); */
 }
 
 

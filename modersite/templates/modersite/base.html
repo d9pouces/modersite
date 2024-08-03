@@ -121,9 +121,18 @@
 {% endblock navbar %}
 
 {% block body %}
-    <a class="alert-ribbon left-top fixed" href="https://url.to-your.repo" data-ribbon="Fork me on GitHub"
-       title="Fork me on GitHub">Fork me on GitHub</a>
-
+    {% for ribbon in DF_RIBBONS %}
+        {% if ribbon.html_tag == "div" %}
+            <div class="{{ ribbon.css_classes }} my-1 text-center p-3" data-ribbon="{{ ribbon.summary }}"
+                 title="{{ ribbon.summary }}">{{ ribbon.message }}</div>
+        {% elif ribbon.url %}
+            <a class="{{ ribbon.css_classes }}" href="{{ ribbon.url }}" data-ribbon="{{ ribbon.summary }}"
+               title="{{ ribbon.summary }}">{{ ribbon.summary }}</a>
+        {% else %}
+            <span class="{{ ribbon.css_classes }}" data-ribbon="{{ ribbon.summary }}"
+                  title="{{ ribbon.summary }}">{{ ribbon.summary }}</span>
+        {% endif %}
+    {% endfor %}
     <div class="container px-0">
         {% block body_messages %}
             {% bootstrap_messages %}

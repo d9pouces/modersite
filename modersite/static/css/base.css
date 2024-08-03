@@ -22014,11 +22014,108 @@ readers do not read off random characters that represent icons */
   transform: rotate(45deg);
 }
 
+.alert-ribbon-tricolor:before {
+  /*    background-color: #a00; */
+  background: linear-gradient(to bottom, #002654 27%, #fff 0, #fff 73%, #ED2939 0);
+  color: #373a3c;
+}
+
+.alert-ribbon-tricolor:after {
+  /*    background-color: #a00; */
+  color: #373a3c;
+}
+
+.alert-ribbon-primary:before {
+  background: #2780e3;
+  color: #fff;
+}
+
+.alert-ribbon-primary:after {
+  background: #2780e3;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-secondary:before {
+  background: #373a3c;
+  color: #fff;
+}
+
+.alert-ribbon-secondary:after {
+  background: #373a3c;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-success:before {
+  background: #3fb618;
+  color: #fff;
+}
+
+.alert-ribbon-success:after {
+  background: #3fb618;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-info:before {
+  background: #9954bb;
+  color: #fff;
+}
+
+.alert-ribbon-info:after {
+  background: #9954bb;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-warning:before {
+  background: #FF7518;
+  color: #fff;
+}
+
+.alert-ribbon-warning:after {
+  background: #FF7518;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-danger:before {
+  background: #f00039;
+  color: #fff;
+}
+
+.alert-ribbon-danger:after {
+  background: #f00039;
+  color: #fff;
+  border-color: #fff;
+}
+
+.alert-ribbon-light:before {
+  background: #f8f9fa;
+  color: #000;
+}
+
+.alert-ribbon-light:after {
+  background: #f8f9fa;
+  color: #000;
+  border-color: #000;
+}
+
+.alert-ribbon-dark:before {
+  background: #373a3c;
+  color: #fff;
+}
+
+.alert-ribbon-dark:after {
+  background: #373a3c;
+  color: #fff;
+  border-color: #fff;
+}
+
 .alert-ribbon:before {
   content: "";
   padding: 0.38em 0;
-  /*    background-color: #a00; */
-  background: linear-gradient(to bottom, #002654 27%, #fff 0, #fff 73%, #ED2939 0);
   /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
   /*    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)); */
   /* Add a drop shadow */
@@ -22030,7 +22127,6 @@ readers do not read off random characters that represent icons */
   /* Set the text from the data-ribbon attribute */
   content: attr(data-ribbon);
   /* Set the text properties */
-  color: #222;
   font-family: var(--bs-body-font-family);
   line-height: 1.54em;
   text-decoration: none;
@@ -22043,8 +22139,7 @@ readers do not read off random characters that represent icons */
   /* Add "stitching" effect */
   border-width: 0.08em 0;
   border-style: dotted;
-  border-color: #f8f9fa;
-  border-color: rgba(255, 255, 255, 0.7);
+  /* border-color: rgba(255, 255, 255, 0.7); */
 }
 
 .alert-ribbon.fixed {
